@@ -1,0 +1,21 @@
+services:
+  app:
+    # Build locally, or use pre-built image on VPS
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: csodaszarvas-booking:test
+    container_name: csodaszarvas-booking-test
+    restart: unless-stopped
+    ports:
+      - "3012:3000" # External port 3012, internal port 3000
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - csodaszarvas-test-network
+
+networks:
+  csodaszarvas-test-network:
+    driver: bridge
