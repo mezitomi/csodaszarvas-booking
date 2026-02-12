@@ -13,6 +13,10 @@
   "brand_name": "Csodaszarvas Íjászbarlang",
   "pages": {
     "index": {
+      "upcoming_bookings": "Your upcoming bookings:",
+      "persons": "persons",
+      "make_booking": "Make a booking",
+      "profile": "My profile"
     },
     "403": {
       "title": "Hold your fire!",
@@ -29,8 +33,16 @@
       "subtitle": "An error occurred. Please try again.",
       "backToHome": "Back to home"
     },
-    "login": {},
-    "profile": {}
+    "login": {
+      "title": "To continue, please log in."
+    },
+    "profile": {
+      "greeting": "Hello, ",
+      "logout": "Logout",
+      "name": "Name",
+      "email": "Email",
+      "registered_at": "Registered at"
+    }
   },
   "vuestic": {
     "search": "Search",

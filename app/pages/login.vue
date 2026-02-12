@@ -7,8 +7,7 @@ const localePath = useLocalePath();
 
 const authStore = useAuthStore();
 if (authStore.user) {
-  // Redirect to profile page if already authenticated
-  navigateTo(localePath("profile"));
+  navigateTo(localePath("/"));
 }
 
 const { t } = useI18n();
@@ -20,7 +19,23 @@ useHead({
 </script>
 
 <template>
-  <p>
+  <div class="container">
+    <CsArrowSeparator lenght="medium" class="arrow-separator">
+      <template #default>
+        <h1>{{ $t("brand_name") }}</h1>
+      </template>
+    </CsArrowSeparator>
+    <p>{{ t("pages.login.title") }}</p>
     <CsGoogleAuthButton />
-  </p>
+  </div>
 </template>
+
+<style scoped lang="scss">
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: 2%;
+}
+</style>

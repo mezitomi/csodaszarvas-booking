@@ -1,9 +1,13 @@
 <script setup lang="ts">
 const { t } = useI18n();
 const title = t("brand_name");
+
 useHead({
   title,
   titleTemplate: null,
+});
+definePageMeta({
+  middleware: ["route"],
 });
 
 const localePath = useLocalePath();
@@ -13,16 +17,20 @@ const localePath = useLocalePath();
   <div class="container">
     <CsArrowSeparator lenght="medium" class="arrow-separator">
       <template #default>
-        <h1>{{ $t("brand_name") }}</h1>
+        <h3>
+          {{ $t("brand_name") }}
+        </h3>
       </template>
     </CsArrowSeparator>
-    <VaButton
-      preset="secondary"
-      text-color="#fff"
-      :to="localePath('booking')"
-    >
-      {{ t(`navbar.booking`) }}
-    </VaButton>
+    <CsUpcomingBookings class="upcoming-bookings" />
+    <div class="button-group">
+      <VaButton :to="localePath('booking')">
+        {{ $t("pages.index.make_booking") }}
+      </VaButton>
+      <VaButton :to="localePath('profile')">
+        {{ $t("pages.index.profile") }}
+      </VaButton>
+    </div>
   </div>
 </template>
 
@@ -30,5 +38,21 @@ const localePath = useLocalePath();
 .container {
   max-inline-size: 1000px;
   margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .arrow-separator,
+  .greeting-card,
+  .upcoming-bookings {
+    margin-block-start: 2rem;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    margin-block-start: 2rem;
+  }
 }
 </style>
