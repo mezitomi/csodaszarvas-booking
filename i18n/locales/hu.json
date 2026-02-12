@@ -17,7 +17,15 @@
       "persons": "fő",
       "greeting": "Szia",
       "make_booking": "Új foglalás",
-      "profile": "Profilom"
+      "profile": "Profilom",
+      "brings_own_equipment": "Saját felszerelést hozok",
+      "needs_equipment": "Felszerelésre van szükségem",
+      "lanes": "pálya",
+      "hours": "óra",
+      "no_upcoming_bookings": "Nincs következő foglalásod.",
+      "confirm_cancel_booking": "Biztosan törölni szeretnéd ezt a foglalást?",
+      "cta_cancel_booking": "Foglalás lemondása",
+      "confirm_cancel_booking_grace_period_passed_warning": "Ha a foglalás kezdete előtt kevesebb, mint 48 órával törlöd a foglalást, nem fogsz visszatérítést kapni. Biztosan törölni szeretnéd ezt a foglalást?"
     },
     "403": {
       "title": "Állj, ne lőj!",

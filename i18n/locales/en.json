@@ -16,7 +16,15 @@
       "upcoming_bookings": "Your upcoming bookings:",
       "persons": "persons",
       "make_booking": "Make a booking",
-      "profile": "My profile"
+      "profile": "My profile",
+      "brings_own_equipment": "I have my own equipment",
+      "needs_equipment": "I need equipment",
+      "lanes": "lanes",
+      "hours": "hours",
+      "no_upcoming_bookings": "You have no upcoming bookings.",
+      "confirm_cancel_booking": "Are you sure you want to cancel this booking?",
+      "cta_cancel_booking": "Cancel booking",
+      "confirm_cancel_booking_grace_period_passed_warning": "If you cancel a booking within 48 hours of the start time, you won't be refunded. Are you sure you want to cancel this booking?"
     },
     "403": {
       "title": "Hold your fire!",
