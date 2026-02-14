@@ -1,5 +1,5 @@
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createSelectSchema, createUpdateSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
 import { user } from "./auth";
@@ -10,7 +10,6 @@ export const booking = sqliteTable("booking", {
   createdBy: int().notNull().references(() => user.id),
   createdAt: int().notNull(),
   updatedAt: int().notNull(),
-  bookingDate: int().notNull(),
   startTime: int().notNull(),
   endTime: int().notNull(),
   durationHours: int().notNull(),
@@ -33,7 +32,6 @@ export const CancelBookingSchema = createUpdateSchema(booking, {
   createdBy: true,
   createdAt: true,
   updatedAt: true,
-  bookingDate: true,
   startTime: true,
   endTime: true,
   durationHours: true,
@@ -46,3 +44,20 @@ export const CancelBookingSchema = createUpdateSchema(booking, {
   cancelledAt: true,
 });
 export type CancelBookingType = z.infer<typeof CancelBookingSchema>;
+
+export const InsertBookingSchema = createInsertSchema(booking, {
+  startTime: z.number().gt(Date.now()),
+}).omit({
+  id: true,
+  userId: true,
+  createdBy: true,
+  createdAt: true,
+  updatedAt: true,
+  endTime: true,
+  participantCount: true,
+  status: true,
+  reservedUntil: true,
+  paymentDeadline: true,
+  cancelledAt: true,
+});
+export type InsertBookingType = z.infer<typeof InsertBookingSchema>;

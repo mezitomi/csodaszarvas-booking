@@ -7,6 +7,9 @@ export const BookingStatusTypes = [BOOKING_STATUS_CANCELLED, BOOKING_STATUS_ACTI
 export type BookingStatus = (typeof BookingStatusTypes)[number];
 
 export const BOOKING_CANCELLATION_WINDOW_MS = 48 * 60 * 60 * 1000;
+export const MAX_LANES = 5;
 
 export const ROUTE_UPCOMING_BOOKINGS = "/api/bookings/upcoming";
 export const ROUTE_CANCEL_BOOKING = "/api/bookings/cancel";
+export const ROUTE_AVAILABLE_SLOTS = "/api/slots/available";
+export const ROUTE_CREATE_BOOKING = "/api/bookings";

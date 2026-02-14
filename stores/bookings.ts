@@ -1,10 +1,5 @@
 import { defineStore } from "pinia";
 
-export type ServerResponse<T> = {
-  data?: T;
-  error: string | null;
-};
-
 export const useBookingsStore = defineStore("useBookingsStore", () => {
   const {
     data: bookings,

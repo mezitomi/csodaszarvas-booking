@@ -11,7 +11,7 @@ export async function getUpcomingBookingsByUserId(userId: number) {
     orderBy: (booking, { desc }) => [desc(booking.createdAt)],
     where: (booking, { and, eq, gt }) => and(
       eq(booking.userId, userId),
-      gt(booking.startTime, Date.now() / 1000),
+      gt(booking.startTime, Date.now()),
       eq(booking.status, BOOKING_STATUS_ACTIVE),
     ),
   });
@@ -31,4 +31,9 @@ export async function updateBooking(data: BookingType, userId: number) {
   const [updated] = await db.update(booking).set(updatedData).where(eq(booking.id, data.id)).returning();
 
   return updated;
+}
+
+export async function createBooking(data: Omit<BookingType, "id">) {
+  const [created] = await db.insert(booking).values(data).returning();
+  return created;
 }

@@ -8,12 +8,11 @@ const { bookings } = storeToRefs(bookingsStore);
 bookingsStore.refreshBookings();
 const items = computed(() => bookings.value || []);
 const { $csrfFetch } = useNuxtApp();
-const { confirm } = useModal();
 const { t, locale } = useI18n();
+const { confirm } = useModal();
 
 function canBeCancelled(booking: Booking) {
-  // TODO: these multiplications needed just because of the db seed? once we have inserts working properly, we should be able to store timestamps in ms and get rid of these
-  if (booking.endTime * 1000 < Date.now())
+  if (booking.endTime < Date.now())
     return false;
 
   if (booking.status === BOOKING_STATUS_CANCELLED)
@@ -30,7 +29,7 @@ async function cancelBooking(bookingId: number) {
   if (!canBeCancelled(booking))
     return;
 
-  const confirmText = booking.startTime * 1000 - Date.now() < BOOKING_CANCELLATION_WINDOW_MS
+  const confirmText = booking.startTime - Date.now() < BOOKING_CANCELLATION_WINDOW_MS
     ? t("pages.index.confirm_cancel_booking_grace_period_passed_warning")
     : t("pages.index.confirm_cancel_booking");
 
@@ -60,7 +59,7 @@ async function cancelBooking(bookingId: number) {
         :key="booking.id"
         fit
       >
-        <VaListItemSection>{{ new Date(booking.startTime * 1000).toLocaleString(locale) }}</VaListItemSection>
+        <VaListItemSection>{{ new Date(booking.startTime).toLocaleString(locale) }}</VaListItemSection>
         <VaListItemSection>
           {{ booking.durationHours }} {{ $t("pages.index.hours") }}, {{ booking.lanesBooked }} {{
             $t("pages.index.lanes") }}

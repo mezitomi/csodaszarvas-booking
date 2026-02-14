@@ -1,5 +1,6 @@
 import { BOOKING_STATUS_CANCELLED } from "~~/app/utils/booking";
 import { findBooking, updateBooking } from "~~/lib/db/queries/bookings";
+import { updateLaneAvailability } from "~~/lib/db/queries/slots";
 import { CancelBookingSchema } from "~~/lib/db/schema";
 
 import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-handler";
@@ -33,5 +34,14 @@ export default defineAuthenticatedEventHandler(async (event) => {
   };
 
   const updated = await updateBooking(updatedData, event.context.user.id);
+
+  if (!updated) {
+    return sendError(event, createError({
+      statusCode: 500,
+      statusMessage: "Failed to cancel booking",
+    }));
+  }
+
+  await updateLaneAvailability(updated);
   return updated;
 });
