@@ -38,7 +38,7 @@ async function cancelBooking(bookingId: number) {
       if (!confirmed)
         return;
 
-      await $csrfFetch(ROUTE_CANCEL_BOOKING, { method: "POST", body: JSON.stringify({ id: bookingId }) });
+      await $csrfFetch(ROUTE_CANCEL_BOOKING.replace("[bookingId]", bookingId.toString()), { method: "DELETE", body: JSON.stringify({ id: bookingId }) });
       bookingsStore.refreshBookings();
     });
 }

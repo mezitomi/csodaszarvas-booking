@@ -52,13 +52,15 @@
       "step_1_lane_selection_description": "Kérjük, válaszd ki, hogy hány pályát szeretnél foglalni. Egy pályán egy fő lőhet egyszerre. Ha többen szeretnétek lőni, több pályát is foglalhatsz.",
       "step_2_duration_title": "Időtartam",
       "step_2_duration_description": "Kérjük, válaszd ki a foglalás időtartamát. Akár három órát is lőhetsz, ha bírod szusszal.",
-      "step_3_equipment_selection_title": "Felszerelés",
-      "step_3_equipment_selection_description": "Kérjük, válaszd ki, hogy hozol-e saját felszerelést, vagy bérelsz tőlünk.",
-      "step_4_date_selection_title": "Dátum és idő",
-      "step_4_date_selection_description": "Kérjük, válaszd ki a foglalásod dátumát és időpontját. A kiválasztott dátum alapján megmutatjuk a rendelkezésre álló időpontokat.",
+      "step_4_equipment_selection_title": "Felszerelés",
+      "step_4_equipment_selection_description": "Kérjük, válaszd ki, hogy hozol-e saját felszerelést, vagy bérelsz tőlünk.",
+      "step_3_date_selection_title": "Dátum és idő",
+      "step_3_date_selection_description": "Kérjük, válaszd ki a foglalásod dátumát és időpontját. A kiválasztott dátum alapján megmutatjuk a rendelkezésre álló időpontokat.",
       "step_5_confirmation_title": "Megerősítés",
-      "step_5_confirmation_description": "Kérjük, ellenőrizd a foglalásod adatait, mielőtt véglegesítenéd a foglalást.",
-      "step_5_cta_text": "Minden rendben, lefoglalom!"
+      "step_5_confirmation_description": "Kérjük, ellenőrizd a foglalásod adatait, mielőtt véglegesítenéd a foglalást. Ha minden rendben van, kattints a Tovább gombra a fizetéshez.",
+      "step_5_cta_text": "Minden rendben, lefoglalom!",
+      "step_6_payment_title": "Fizetés",
+      "step_6_payment_description": "Kérjük, válaszd ki a fizetési módot."
     }
   },
   "vuestic": {

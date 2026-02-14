@@ -4,7 +4,7 @@ import { createBooking } from "~~/lib/db/queries/bookings";
 import { updateLaneAvailability } from "~~/lib/db/queries/slots";
 import { InsertBookingSchema } from "~~/lib/db/schema";
 
-import { BOOKING_STATUS_ACTIVE } from "~/utils/booking";
+import { BOOKING_STATUS_WAITING_FOR_PAYMENT } from "~/utils/booking";
 import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-handler";
 
 export default defineAuthenticatedEventHandler(async (event) => {
@@ -24,10 +24,10 @@ export default defineAuthenticatedEventHandler(async (event) => {
     createdAt: Date.now(),
     updatedAt: Date.now(),
     endTime: result.data.startTime + result.data.durationHours * 3600,
-    status: BOOKING_STATUS_ACTIVE,
+    status: BOOKING_STATUS_WAITING_FOR_PAYMENT,
     participantCount: null,
-    reservedUntil: null,
-    paymentDeadline: null,
+    reservedUntil: Date.now() + 5 * 60 * 1000, // Hold reservation for 5 minutes
+    paymentDeadline: Date.now() + 60 * 60 * 1000, // Set payment deadline to 1 hour from now
     cancelledAt: null,
   };
 
