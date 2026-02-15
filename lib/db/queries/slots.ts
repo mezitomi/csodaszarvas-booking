@@ -1,5 +1,6 @@
-import { BOOKING_STATUS_CANCELLED, MAX_LANES } from "~~/app/utils/booking";
 import { and, eq, gte, lt } from "drizzle-orm";
+
+import { BOOKING_STATUS_CANCELLED, MAX_LANES } from "~/utils/constants";
 
 import type { BookingType, LaneAvailabilityType } from "../schema";
 

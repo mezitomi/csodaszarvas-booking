@@ -16,12 +16,11 @@ export const ROUTE_CREATE_BOOKING = "/api/bookings";
 export const ROUTE_USER_PASSES = "/api/passes";
 export const ROUTE_CREATE_BOOKING_PAYMENT = "/api/bookings/[bookingId]/payment";
 
-export const PASS_TYPE_RENTAL = "regular_with_rental";
-export const PASS_TYPE_REGULAR = "regular";
-export const PASS_TYPE_UNLIMITED = "unlimited";
+export const CREDIT_TYPE_RENTAL = "regular_with_rental";
+export const CREDIT_TYPE_REGULAR = "regular";
 
-export const PassTypes = [PASS_TYPE_RENTAL, PASS_TYPE_REGULAR, PASS_TYPE_UNLIMITED] as const;
-export type PassType = (typeof PassTypes)[number];
+export const CreditTypes = [CREDIT_TYPE_RENTAL, CREDIT_TYPE_REGULAR] as const;
+export type CreditType = (typeof CreditTypes)[number];
 
 export const PASS_STARTING_CREDITS = 12;
 export const PASS_EXPIRATION_MS = 60 * 24 * 60 * 60 * 1000; // 60 days in milliseconds

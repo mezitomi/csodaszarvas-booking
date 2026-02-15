@@ -8,7 +8,7 @@ import { user } from "./auth";
 export const pass = sqliteTable("pass", {
   id: int().primaryKey({ autoIncrement: true }),
   userId: int().notNull().references(() => user.id, { onDelete: "cascade" }),
-  passType: text().notNull(),
+  creditType: text().notNull(),
   creditsTotal: int().notNull(),
   creditsRemaining: int().notNull(),
   expiresAt: int().notNull(),

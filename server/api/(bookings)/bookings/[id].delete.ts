@@ -1,10 +1,10 @@
-import { BOOKING_CANCELLATION_WINDOW_MS, BOOKING_STATUS_CANCELLED, PAYMENT_STATUS_PAID } from "~~/app/utils/booking";
 import { findBooking, updateBooking } from "~~/lib/db/queries/bookings";
 import { findPass, updatePass } from "~~/lib/db/queries/passes";
 import { findPayment } from "~~/lib/db/queries/payments";
 import { updateLaneAvailability } from "~~/lib/db/queries/slots";
 import { CancelBookingSchema } from "~~/lib/db/schema";
 
+import { BOOKING_CANCELLATION_WINDOW_MS, BOOKING_STATUS_CANCELLED, PAYMENT_STATUS_PAID } from "~/utils/constants";
 import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-handler";
 
 export default defineAuthenticatedEventHandler(async (event) => {

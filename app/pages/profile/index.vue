@@ -47,7 +47,7 @@ const user = authStore.user!;
         <p>{{ $t("pages.profile.passes_info") }}</p>
         <ul>
           <li v-for="pass in passes" :key="pass.id">
-            {{ new Date(pass.createdAt).toLocaleDateString() }} - {{ new Date(pass.expiresAt).toLocaleDateString() }} - {{ pass.passType }} - {{ pass.creditsRemaining }}
+            {{ new Date(pass.createdAt).toLocaleDateString() }} - {{ new Date(pass.expiresAt).toLocaleDateString() }} - {{ pass.creditType }} - {{ pass.creditsRemaining }}
           </li>
         </ul>
       </VaCardContent>

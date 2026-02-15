@@ -42,7 +42,10 @@
       "logout": "Kijelentkezés",
       "name": "Név",
       "email": "Email",
-      "registered_at": "Regisztráció dátuma"
+      "registered_at": "Regisztráció dátuma",
+      "passes": "Bérletek",
+      "passes_info": "Bérleted adatai",
+      "no_passes": "Nincsenek bérleteid."
     },
     "login": {
       "title": "A folytatáshoz kérjük, jelentkezz be."
@@ -60,7 +63,22 @@
       "step_5_confirmation_description": "Kérjük, ellenőrizd a foglalásod adatait, mielőtt véglegesítenéd a foglalást. Ha minden rendben van, kattints a Tovább gombra a fizetéshez.",
       "step_5_cta_text": "Minden rendben, lefoglalom!",
       "step_6_payment_title": "Fizetés",
-      "step_6_payment_description": "Kérjük, válaszd ki a fizetési módot."
+      "step_6_payment_description": "Kérjük, válaszd ki a fizetési módot.",
+      "use_pass": "Bérlet használata",
+      "incompatible_pass": "Ez a bérlet nem használható ehhez a foglaláshoz",
+      "pay_with_pass": "Fizetés bérlettel",
+      "pay_with_card": "Fizetés kártyával",
+      "equipment_option_use_own": "Van saját felszerelésem",
+      "equipment_option_rent": "Bérlek felszerelést",
+      "booking_details": "Foglalás adatai",
+      "duration": "Időtartam",
+      "equipment": "Felszerelés",
+      "selected_slot": "Kiválasztott időpont",
+      "proceed_to_payment": "Tovább a fizetéshez",
+      "lanes": "Lőállás(ok)",
+      "hours": "óra",
+      "expires_at": "Lejárat",
+      "credits_remaining": "Hátralévő bérlet kreditek"
     }
   },
   "vuestic": {

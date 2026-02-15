@@ -3,7 +3,7 @@ import { findPass, updatePass } from "~~/lib/db/queries/passes";
 import { createPayment } from "~~/lib/db/queries/payments";
 import { InsertPaymentSchema } from "~~/lib/db/schema";
 
-import { BOOKING_STATUS_ACTIVE } from "~/utils/booking";
+import { BOOKING_STATUS_ACTIVE, CREDIT_TYPE_REGULAR, CREDIT_TYPE_RENTAL } from "~/utils/constants";
 import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-handler";
 
 export default defineAuthenticatedEventHandler(async (event) => {
@@ -38,6 +38,13 @@ export default defineAuthenticatedEventHandler(async (event) => {
       return sendError(event, createError({
         statusCode: 400,
         statusMessage: "Insufficient credits on pass",
+      }));
+    }
+
+    if (passToUpdate.creditType !== (bookingToUpdate.equipmentNeeded ? CREDIT_TYPE_RENTAL : CREDIT_TYPE_REGULAR)) {
+      return sendError(event, createError({
+        statusCode: 400,
+        statusMessage: "Pass credit type does not match booking equipment requirement",
       }));
     }
 

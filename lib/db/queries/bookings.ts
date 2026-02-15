@@ -1,5 +1,6 @@
-import { BOOKING_STATUS_ACTIVE } from "~~/app/utils/booking";
 import { eq } from "drizzle-orm";
+
+import { BOOKING_STATUS_ACTIVE } from "~/utils/constants";
 
 import type { BookingType } from "../schema";
 

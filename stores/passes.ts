@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-import { ROUTE_USER_PASSES } from "~/utils/booking";
+import { ROUTE_USER_PASSES } from "~/utils/constants";
 
 export const usePassesStore = defineStore("usePassesStore", () => {
   const {

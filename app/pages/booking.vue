@@ -21,7 +21,7 @@ const currentStep = ref(0);
 const model = ref({
   lanes: undefined as undefined | number,
   duration: undefined as undefined | number,
-  equipmentOption: undefined as undefined | string,
+  creditType: undefined as undefined | CreditType,
   selectedSlot: undefined as undefined | string,
 });
 
@@ -33,7 +33,8 @@ const passesStore = usePassesStore();
 const { passes } = storeToRefs(passesStore);
 const compatiblePasses: Ref<SchemaPassType[]> = computed(() => {
   return (passes.value ?? []).filter((pass) => {
-    return pass.creditsRemaining >= model.value.duration! * model.value.lanes! && pass.expiresAt > Date.parse(model.value.selectedSlot!);
+    return pass.creditsRemaining >= model.value.duration! * model.value.lanes!
+      && pass.expiresAt > Date.parse(model.value.selectedSlot!);
   });
 });
 
@@ -83,7 +84,7 @@ const steps = ref(defineVaStepperSteps([
   {
     label: t("pages.booking.step_4_equipment_selection_title"),
     beforeLeave: async (step) => {
-      step.hasError = model.value.equipmentOption === undefined;
+      step.hasError = model.value.creditType === undefined;
       return !step.hasError;
     },
   },
@@ -126,7 +127,7 @@ async function reserveBooking() {
       startTime: Date.parse(model.value.selectedSlot!),
       durationHours: model.value.duration,
       lanesBooked: model.value.lanes,
-      equipmentNeeded: model.value.equipmentOption === "Bérlek felszerelést" ? 1 : 0,
+      equipmentNeeded: Number(model.value.creditType === CREDIT_TYPE_RENTAL),
     },
   })
     .catch((error) => {
@@ -192,46 +193,68 @@ async function payWithCard() {
         </template>
         <template #step-content-3>
           <p>{{ $t("pages.booking.step_4_equipment_selection_description") }}</p>
-          <VaRadio v-model="model.equipmentOption" :options="['Van felszerelésem', 'Bérlek felszerelést']" />
+          <VaRadio
+            v-model="model.creditType"
+            :options="[
+              {
+                text: t('pages.booking.equipment_option_use_own'),
+                value: CREDIT_TYPE_REGULAR,
+              },
+              {
+                text: t('pages.booking.equipment_option_rent'),
+                value:
+                  CREDIT_TYPE_RENTAL,
+              },
+            ]"
+          />
         </template>
         <template #step-content-4>
           <p>{{ $t("pages.booking.step_5_confirmation_description") }}</p>
           <div>
-            Foglalási adatok:
-            <p v-if="model.lanes">
-              Pályák száma: {{ model.lanes }}
+            <p>{{ $t("pages.booking.booking_details") }}:</p>
+            <p v-if="model.selectedSlot">
+              {{ $t("pages.booking.selected_slot") }}: {{ new Date(model.selectedSlot).toLocaleString(locale) }}
             </p>
             <p v-if="model.duration">
-              Időtartam: {{ model.duration }} óra
+              {{ $t("pages.booking.duration") }}: {{ model.duration }} {{ $t("pages.booking.hours") }}
             </p>
-            <p v-if="model.equipmentOption">
-              Felszerelés: {{ model.equipmentOption }}
+            <p v-if="model.lanes">
+              {{ $t("pages.booking.lanes") }}: {{ model.lanes }}
             </p>
-            <p v-if="model.selectedSlot">
-              Kiválasztott időpont: {{ new Date(model.selectedSlot).toLocaleString(locale) }}
+            <p v-if="model.creditType">
+              {{ $t("pages.booking.equipment") }}: {{ model.creditType === CREDIT_TYPE_REGULAR ? t('pages.booking.equipment_option_use_own') : t('pages.booking.equipment_option_rent') }}
             </p>
             <VaButton @click="reserveBooking">
-              Tovább a fizetéshez
+              {{ $t("pages.booking.proceed_to_payment") }}
             </VaButton>
           </div>
         </template>
         <template #step-content-5>
           <p>{{ $t("pages.booking.step_6_payment_description") }}</p>
           <VaButton :disabled="compatiblePasses.length === 0" @click="selectPaymentModal = true">
-            Use pass
+            {{ $t("pages.booking.pay_with_pass") }}
           </VaButton>
           <VaButton @click="payWithCard">
-            Pay with card
+            {{ $t("pages.booking.pay_with_card") }}
           </VaButton>
-          <VaModal v-model="selectPaymentModal" ok-text="Apply">
+          <VaModal v-model="selectPaymentModal">
             <VaCard v-for="pass in compatiblePasses" :key="pass.id">
-              <VaCardTitle> {{ pass.passType }}</VaCardTitle>
+              <VaCardTitle> {{ pass.creditType }}</VaCardTitle>
               <VaCardContent>
-                Lejárat: {{ new Date(pass.expiresAt).toLocaleDateString() }} - {{ pass.creditsRemaining }} credits
-                remaining
-                <VaButton @click="payWithPass(pass)">
-                  Use this pass
+                <p>
+                  {{ $t('pages.booking.expires_at') }}: {{ new Date(pass.expiresAt).toLocaleDateString() }}
+                </p>
+                <p>
+                  {{ pass.creditsRemaining }} {{ $t('pages.booking.credits_remaining') }}
+                </p>
+                <VaButton v-if="pass.creditType === model.creditType" @click="payWithPass(pass)">
+                  {{ $t('pages.booking.use_pass') }}
                 </VaButton>
+                <VaPopover v-else :message="$t('pages.booking.incompatible_pass')">
+                  <VaButton disabled>
+                    {{ $t("pages.booking.use_pass") }}
+                  </VaButton>
+                </VaPopover>
               </VaCardContent>
             </VaCard>
           </VaModal>
@@ -246,8 +269,8 @@ async function payWithCard() {
       <p v-if="model.duration">
         Időtartam: {{ model.duration }} óra
       </p>
-      <p v-if="model.equipmentOption">
-        Felszerelés: {{ model.equipmentOption }}
+      <p v-if="model.creditType">
+        Felszerelés: {{ model.creditType === CREDIT_TYPE_REGULAR ? t('pages.booking.equipment_option_use_own') : t('pages.booking.equipment_option_rent') }}
       </p>
       <p v-if="model.selectedSlot">
         Kiválasztott időpont: {{ new Date(model.selectedSlot).toLocaleString(locale) }}

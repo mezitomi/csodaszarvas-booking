@@ -50,6 +50,13 @@
       "when": 1771106807029,
       "tag": "0008_panoramic_dark_phoenix",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1771160050175,
+      "tag": "0009_yummy_black_tarantula",
+      "breakpoints": true
     }
   ]
 }

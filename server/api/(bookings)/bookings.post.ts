@@ -4,7 +4,7 @@ import { createBooking } from "~~/lib/db/queries/bookings";
 import { updateLaneAvailability } from "~~/lib/db/queries/slots";
 import { InsertBookingSchema } from "~~/lib/db/schema";
 
-import { BOOKING_STATUS_WAITING_FOR_PAYMENT } from "~/utils/booking";
+import { BOOKING_STATUS_WAITING_FOR_PAYMENT } from "~/utils/constants";
 import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-handler";
 
 export default defineAuthenticatedEventHandler(async (event) => {

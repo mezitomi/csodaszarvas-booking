@@ -49,7 +49,10 @@
       "logout": "Logout",
       "name": "Name",
       "email": "Email",
-      "registered_at": "Registered at"
+      "registered_at": "Registered at",
+      "passes": "Passes",
+      "passes_info": "Pass details",
+      "no_passes": "You have no passes."
     },
     "booking": {
       "step_1_lane_selection_title": "Lane",
@@ -64,7 +67,22 @@
       "step_5_confirmation_title": "Confirmation",
       "step_5_cta_text": "Looks good, book it!",
       "step_6_payment_title": "Payment",
-      "step_6_payment_description": "Please select your payment method."
+      "step_6_payment_description": "Please select your payment method.",
+      "use_pass": "Use this pass",
+      "incompatible_pass": "This pass is not compatible with your equipment choice",
+      "pay_with_pass": "Pay with pass",
+      "pay_with_card": "Pay with card",
+      "equipment_option_use_own": "I have my own equipment",
+      "equipment_option_rent": "I need to rent equipment",
+      "booking_details": "Booking details",
+      "duration": "Duration",
+      "equipment": "Equipment",
+      "selected_slot": "Selected slot",
+      "proceed_to_payment": "Proceed to payment",
+      "lanes": "Lane(s)",
+      "hours": "hour(s)",
+      "expires_at": "Expires at",
+      "credits_remaining": "Pass credits remaining"
     }
   },
   "vuestic": {
