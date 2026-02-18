@@ -23,6 +23,9 @@
       "needs_equipment": "Felszerelésre van szükségem",
       "lanes": "pálya",
       "hours": "óra",
+      "minutes": "perc",
+      "lane_and_equipment": "Pálya és felszerelés",
+      "lane": "Pálya",
       "no_upcoming_bookings": "Nincs következő foglalásod.",
       "confirm_cancel_booking": "Biztosan törölni szeretnéd ezt a foglalást?",
       "cta_cancel_booking": "Foglalás lemondása",
@@ -109,6 +112,12 @@
     "credit_types": {
       "regular": "Pálya (saját felszereléssel)",
       "regular_with_rental": "Pálya és felszerelés"
+    },
+    "booking_status": {
+      "waiting_for_payment": "Fizetésre vár",
+      "cancelled": "Lemondva",
+      "confirmed": "Fizetve",
+      "reserved": "Fenntartva"
     }
   },
   "forms": {
@@ -162,6 +171,15 @@
           "created_at": "Regisztráció dátuma",
           "actions": "Műveletek"
         }
+      }
+    },
+    "bookings": {
+      "columns": {
+        "start_time": "Időpont",
+        "service": "Szolgáltatás",
+        "details": "Részletek",
+        "status": "Státusz",
+        "actions": "Műveletek"
       }
     }
   },

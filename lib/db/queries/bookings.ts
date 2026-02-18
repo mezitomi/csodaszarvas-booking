@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 
-import { BOOKING_STATUS_ACTIVE } from "~/utils/constants";
+import { BOOKING_STATUS_ACTIVE, BOOKING_STATUS_WAITING_FOR_PAYMENT } from "~/utils/constants";
 
 import type { BookingType } from "../schema";
 
@@ -9,11 +9,11 @@ import { booking } from "../schema";
 
 export async function getUpcomingBookingsByUserId(userId: number) {
   return db.query.booking.findMany({
-    orderBy: (booking, { desc }) => [desc(booking.createdAt)],
-    where: (booking, { and, eq, gt }) => and(
+    orderBy: (booking, { asc }) => [asc(booking.startTime)],
+    where: (booking, { and, eq, gt, inArray }) => and(
       eq(booking.userId, userId),
       gt(booking.startTime, Date.now()),
-      eq(booking.status, BOOKING_STATUS_ACTIVE),
+      inArray(booking.status, [BOOKING_STATUS_ACTIVE, BOOKING_STATUS_WAITING_FOR_PAYMENT]),
     ),
   });
 }

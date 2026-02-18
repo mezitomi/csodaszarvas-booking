@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import type { BookingType as Booking } from "~~/lib/db/schema";
+import type { ColDef } from "ag-grid-community";
 
+import "ag-grid-community/styles/ag-grid.css";
+import "@vuestic/ag-grid-theme";
 import { useBookingsStore } from "~~/stores/bookings";
+import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
+import { AgGridVue } from "ag-grid-vue3";
+import { storeToRefs } from "pinia";
+
+import CsUpcomingBookingsActionsCell from "~/components/(pages)/(index)/cs-upcoming-bookings-actions-cell.vue";
+
+ModuleRegistry.registerModules([AllCommunityModule]);
+const { locale, t } = useI18n();
+const { localeText } = useAgGridLocale();
 
 const bookingsStore = useBookingsStore();
 const { bookings } = storeToRefs(bookingsStore);
 bookingsStore.refreshBookings();
-const items = computed(() => bookings.value || []);
 const { $csrfFetch } = useNuxtApp();
-const { t, locale } = useI18n();
 const { confirm } = useModal();
 
 function canBeCancelled(booking: Booking) {
@@ -42,55 +52,93 @@ async function cancelBooking(bookingId: number) {
       bookingsStore.refreshBookings();
     });
 }
+
+const colDefs = computed<ColDef[]>(() => [
+  {
+    field: "startTime",
+    headerName: t("grids.bookings.columns.start_time"),
+    width: 100,
+    valueFormatter: params => new Date(params.data?.startTime).toLocaleString(locale.value, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+  },
+  {
+    field: "Szolgáltatás",
+    headerName: t("grids.bookings.columns.service"),
+    valueGetter: params => params?.data?.equipmentNeeded ? t("pages.index.lane_and_equipment") : t("pages.index.lane"),
+  },
+  {
+    field: "Részletek",
+    headerName: t("grids.bookings.columns.details"),
+    valueGetter: params => `${params.data?.lanesBooked} ${t("pages.index.lanes")} - ${params.data?.durationHours} ${t("pages.index.hours")}`,
+  },
+  {
+    field: "status",
+    headerName: t("grids.bookings.columns.status"),
+    valueFormatter: params => t(`common.booking_status.${params.data?.status}`),
+  },
+  {
+    field: "actions",
+    headerName: t("grids.bookings.columns.actions"),
+    cellRenderer: CsUpcomingBookingsActionsCell,
+    width: 120,
+    sortable: false,
+    filter: false,
+    resizable: false,
+  },
+]);
+
+const defaultColDef = ref<ColDef>({
+  resizable: true,
+  sortable: false,
+  filter: false,
+  flex: 1,
+});
+
+const gridOptions = computed(() => ({
+  context: {
+    onDeleteBooking: (bookingId: number) => {
+      cancelBooking(bookingId);
+    },
+  },
+}));
 </script>
 
 <template>
   <div class="container">
-    <VaList
-      v-if="items.length > 0"
-      fit
-      spaced
-    >
-      <VaListLabel>
-        {{ $t("pages.index.upcoming_bookings") }}
-      </VaListLabel>
-      <VaListItem
-        v-for="booking in items"
-        :key="booking.id"
-        fit
-      >
-        <VaListItemSection>{{ new Date(booking.startTime).toLocaleString(locale) }}</VaListItemSection>
-        <VaListItemSection>
-          {{ booking.durationHours }} {{ $t("pages.index.hours") }}, {{ booking.lanesBooked }} {{
-            $t("pages.index.lanes") }}
-        </VaListItemSection>
-        <VaListItemSection>
-          {{ booking.equipmentNeeded ? $t('pages.index.needs_equipment')
-            : $t('pages.index.brings_own_equipment') }}
-        </VaListItemSection>
-        <VaListItemSection class="button-group">
-          <VaButton
-            v-if="canBeCancelled(booking)"
-            class="button"
-            preset="secondary"
-            hover-behavior="opacity"
-            :hover-opacity="0.4"
-            text-color="danger"
-            @click="cancelBooking(booking.id)"
-          >
-            <Icon name="tabler:trash" />
-          </VaButton>
-        </VaListItemSection>
-        <VaListSeparator spaced />
-      </VaListItem>
-    </VaList>
-    <div v-else>
-      <p>{{ $t("pages.index.no_upcoming_bookings") }}</p>
+    <h3>
+      {{ $t("pages.index.upcoming_bookings") }}
+    </h3>
+    <div class="grid-container">
+      <AgGridVue
+        :key="locale"
+        data-grid-name="grids.bookings"
+        style="height: 100%; width: 100%;"
+        class="ag-theme-vuestic"
+        theme="legacy"
+        :column-defs="colDefs"
+        :row-data="bookings"
+        :default-col-def="defaultColDef"
+        :locale-text="localeText"
+        :pagination="true"
+        :pagination-page-size="10"
+        :pagination-page-size-selector="[10, 20, 50, 100]"
+        :animate-rows="true"
+        :context="gridOptions.context"
+      />
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.grid-container {
+  block-size: 400px;
+  inline-size: 100%;
+}
 .container {
   max-inline-size: 1000px;
   margin: 2rem auto;
