@@ -91,43 +91,20 @@
         "users": {
           "title": "Users",
           "description": "Manage users here."
+        },
+        "passes": {
+          "title": "Passes",
+          "description": "Manage passes here."
         }
       },
       "users": {
-        "title": "Users",
-        "columns": {
-          "id": "ID",
-          "name": "Name",
-          "email": "Email",
-          "created_at": "Registered At",
-          "actions": "Actions"
-        }
+        "title": "Users"
       },
       "passes": {
         "title": "Passes",
-        "columns": {
-          "id": "ID",
-          "actions": "Actions",
-          "credit_type": "Credit Type",
-          "expires_at": "Expires At",
-          "created_at": "Created At",
-          "credits_remaining": "Credits Remaining",
-          "user": "Owner"
-        },
-        "fields": {
-          "user": "User",
-          "credit_type": "Credit Type",
-          "credits_total": "Total credits",
-          "credits_remaining": "Remaining credits",
-          "expires_at": "Expiration date"
-        },
         "issue_pass": "Issue pass",
         "edit_pass": "Edit pass",
-        "cancel": "Cancel",
-        "save": "Save",
         "select_user": "Select user",
-        "equipment_option_rent": "Lane and equipment rental",
-        "equipment_option_use_own": "Lane (with own equipment)",
         "delete_pass_confirm_title": "Delete pass",
         "delete_pass_confirm_message": "Are you sure you want to delete this pass? This action cannot be undone."
       }
@@ -137,6 +114,60 @@
     "credit_types": {
       "regular": "Lane (with own equipment)",
       "regular_with_rental": "Lane and equipment rental"
+    }
+  },
+  "forms": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "admin": {
+      "passes": {
+        "issue": {
+          "user": "User",
+          "credit_type": "Credit type",
+          "credits_total": "Total credits",
+          "expires_at": "Expiration date"
+        },
+        "edit": {
+          "user": "User",
+          "credit_type": "Credit type",
+          "credits_total": "Total credits",
+          "credits_remaining": "Credits remaining",
+          "expires_at": "Expiration date"
+        }
+      }
+    }
+  },
+  "grids": {
+    "admin": {
+      "passes": {
+        "columns": {
+          "id": "ID",
+          "user": "Owner",
+          "credit_type": "Credit Type",
+          "credits_remaining": "Credits Remaining",
+          "expires_at": "Expires At",
+          "created_at": "Created At",
+          "actions": "Actions"
+        }
+      },
+      "select_pass_user": {
+        "columns": {
+          "id": "ID",
+          "name": "Name",
+          "email": "Email",
+          "created_at": "Registered At",
+          "actions": "Actions"
+        }
+      },
+      "users": {
+        "columns": {
+          "id": "ID",
+          "name": "Name",
+          "email": "Email",
+          "created_at": "Registered At",
+          "actions": "Actions"
+        }
+      }
     }
   },
   "vuestic": {

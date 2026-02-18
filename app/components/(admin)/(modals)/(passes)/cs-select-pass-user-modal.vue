@@ -29,20 +29,20 @@ const { localeText } = useAgGridLocale();
 const colDefs = computed<ColDef[]>(() => [
   {
     field: "id",
-    headerName: t("pages.admin.passes.columns.id"),
+    headerName: t("grids.admin.select_pass_user.columns.id"),
     width: 100,
   },
   {
     field: "name",
-    headerName: t("pages.admin.passes.columns.user"),
+    headerName: t("grids.admin.select_pass_user.columns.name"),
   },
   {
     field: "email",
-    headerName: t("pages.admin.users.columns.email"),
+    headerName: t("grids.admin.select_pass_user.columns.email"),
   },
   {
     field: "actions",
-    headerName: t("pages.admin.passes.columns.actions"),
+    headerName: t("grids.admin.select_pass_user.columns.actions"),
     cellRenderer: CsSelectUserActionsCell,
     width: 120,
     sortable: false,
@@ -92,6 +92,7 @@ const gridOptions = computed(() => ({
       <div style="height: 300px; width: 100%;">
         <AgGridVue
           :key="locale"
+          data-grid-name="grids.admin.select_pass_user"
           style="height: 100%; width: 100%;"
           class="ag-theme-vuestic"
           theme="legacy"

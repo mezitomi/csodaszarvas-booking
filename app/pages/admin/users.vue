@@ -36,25 +36,25 @@ function numberToDateFormatter(date: number | undefined) {
 const colDefs = computed<ColDef[]>(() => [
   {
     field: "id",
-    headerName: t("pages.admin.users.columns.id"),
+    headerName: t("grids.admin.users.columns.id"),
     width: 100,
   },
   {
     field: "name",
-    headerName: t("pages.admin.users.columns.name"),
+    headerName: t("grids.admin.users.columns.name"),
   },
   {
     field: "email",
-    headerName: t("pages.admin.users.columns.email"),
+    headerName: t("grids.admin.users.columns.email"),
   },
   {
     field: "createdAt",
-    headerName: t("pages.admin.users.columns.created_at"),
+    headerName: t("grids.admin.users.columns.created_at"),
     valueFormatter: params => numberToDateFormatter(params.data?.createdAt),
   },
   {
     field: "actions",
-    headerName: t("pages.admin.users.columns.actions"),
+    headerName: t("grids.admin.users.columns.actions"),
     cellRenderer: CsUserActionsCell,
     width: 120,
     sortable: false,
@@ -83,6 +83,7 @@ const defaultColDef = ref<ColDef>({
     <div style="height: 500px; width: 100%;">
       <AgGridVue
         :key="locale"
+        data-grid-name="grids.admin.users"
         style="height: 100%; width: 100%;"
         class="ag-theme-vuestic"
         theme="legacy"

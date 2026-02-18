@@ -40,36 +40,36 @@ function numberToDateFormatter(date: number | undefined) {
 const colDefs = computed<ColDef[]>(() => [
   {
     field: "id",
-    headerName: t("pages.admin.passes.columns.id"),
+    headerName: t("grids.admin.passes.columns.id"),
     width: 100,
   },
   {
     field: "user.name",
-    headerName: t("pages.admin.passes.columns.user"),
+    headerName: t("grids.admin.passes.columns.user"),
   },
   {
     field: "credit_type",
-    headerName: t("pages.admin.passes.columns.credit_type"),
+    headerName: t("grids.admin.passes.columns.credit_type"),
     valueFormatter: params => t(`common.credit_types.${params.data?.creditType}`),
   },
   {
     field: "creditsRemaining",
-    headerName: t("pages.admin.passes.columns.credits_remaining"),
+    headerName: t("grids.admin.passes.columns.credits_remaining"),
     width: 150,
   },
   {
     field: "expiresAt",
-    headerName: t("pages.admin.passes.columns.expires_at"),
+    headerName: t("grids.admin.passes.columns.expires_at"),
     valueFormatter: params => numberToDateFormatter(params.data?.expiresAt),
   },
   {
     field: "createdAt",
-    headerName: t("pages.admin.passes.columns.created_at"),
+    headerName: t("grids.admin.passes.columns.created_at"),
     valueFormatter: params => numberToDateFormatter(params.data?.createdAt),
   },
   {
     field: "actions",
-    headerName: t("pages.admin.passes.columns.actions"),
+    headerName: t("grids.admin.passes.columns.actions"),
     cellRenderer: CsPassActionsCell,
     width: 120,
     sortable: false,
@@ -90,16 +90,16 @@ const gridOptions = computed(() => ({
     onDeletePass: (passId: number) => {
       deletePass(passId);
     },
-    onEditPass: (pass: PassType) => {
+    onEditPass: (pass: PassType & { user: { name: string } }) => {
       openEditPass(pass);
     },
   },
 }));
 
 const showEditPassModal = ref(false);
-const editPassModalContent = ref<PassType | null>(null);
+const editPassModalContent = ref<PassType & { user: { name: string } } | null>(null);
 
-function openEditPass(pass: PassType) {
+function openEditPass(pass: PassType & { user: { name: string } }) {
   editPassModalContent.value = { ...pass };
   showEditPassModal.value = true;
 }
@@ -126,6 +126,7 @@ function deletePass(passId: number) {
     <div style="height: 500px; width: 100%;">
       <AgGridVue
         :key="locale"
+        data-grid-name="grids.admin.passes"
         style="height: 100%; width: 100%;"
         class="ag-theme-vuestic"
         theme="legacy"

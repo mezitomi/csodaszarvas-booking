@@ -72,3 +72,5 @@ export async function insertPass(data: InsertPassType) {
   const [inserted] = await db.insert(pass).values(passData).returning();
   return inserted;
 }
+
+export type PassTypeWithUser = PassType & { user: { name: string } };

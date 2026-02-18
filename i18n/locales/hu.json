@@ -87,43 +87,20 @@
         "users": {
           "title": "Felhasználók",
           "description": "Itt kezelheted a felhasználókat."
+        },
+        "passes": {
+          "title": "Bérletek",
+          "description": "Itt kezelheted a bérleteket."
         }
       },
       "users": {
-        "title": "Felhasználók",
-        "columns": {
-          "id": "ID",
-          "name": "Név",
-          "email": "E-mail",
-          "created_at": "Regisztrált",
-          "actions": "Műveletek"
-        }
+        "title": "Felhasználók"
       },
       "passes": {
         "title": "Bérletek",
-        "columns": {
-          "id": "ID",
-          "credit_type": "Bérlet típus",
-          "actions": "Műveletek",
-          "expires_at": "Lejárat",
-          "created_at": "Létrehozva",
-          "credits_remaining": "Hátralévő kreditek",
-          "user": "Tulajdonos"
-        },
-        "fields": {
-          "user": "Felhasználó",
-          "credit_type": "Bérlet típus",
-          "credits_total": "Kreditek száma",
-          "credits_remaining": "Megmaradt kreditek száma",
-          "expires_at": "Lejárat dátuma"
-        },
         "issue_pass": "Bérlet kiadása",
         "edit_pass": "Bérlet szerkesztése",
-        "cancel": "Mégse",
-        "save": "Mentés",
         "select_user": "Kiválasztás",
-        "equipment_option_rent": "Pálya és felszerelés",
-        "equipment_option_use_own": "Pálya (saját felszereléssel)",
         "delete_pass_confirm_message": "Biztosan törölni szeretnéd ezt a bérletet? Ez a művelet nem vonható vissza."
       }
     }
@@ -132,6 +109,60 @@
     "credit_types": {
       "regular": "Pálya (saját felszereléssel)",
       "regular_with_rental": "Pálya és felszerelés"
+    }
+  },
+  "forms": {
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "admin": {
+      "passes": {
+        "issue": {
+          "user": "Felhasználó",
+          "credit_type": "Bérlet típus",
+          "credits_total": "Kreditek száma",
+          "expires_at": "Lejárat dátuma"
+        },
+        "edit": {
+          "user": "Felhasználó",
+          "credit_type": "Bérlet típus",
+          "credits_total": "Kreditek száma",
+          "credits_remaining": "Hátralévő kreditek",
+          "expires_at": "Lejárat dátuma"
+        }
+      }
+    }
+  },
+  "grids": {
+    "admin": {
+      "passes": {
+        "columns": {
+          "id": "ID",
+          "user": "Tulajdonos",
+          "credit_type": "Bérlet típus",
+          "credits_remaining": "Hátralévő kreditek",
+          "expires_at": "Lejárat",
+          "created_at": "Létrehozva",
+          "actions": "Műveletek"
+        }
+      },
+      "select_pass_user": {
+        "columns": {
+          "id": "ID",
+          "name": "Név",
+          "email": "E-mail",
+          "created_at": "Regisztráció dátuma",
+          "actions": "Műveletek"
+        }
+      },
+      "users": {
+        "columns": {
+          "id": "ID",
+          "name": "Név",
+          "email": "E-mail",
+          "created_at": "Regisztráció dátuma",
+          "actions": "Műveletek"
+        }
+      }
     }
   },
   "vuestic": {
