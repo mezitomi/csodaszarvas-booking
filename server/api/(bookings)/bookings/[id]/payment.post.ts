@@ -1,5 +1,5 @@
 import { findBooking, updateBooking } from "~~/lib/db/queries/bookings";
-import { findPass, updatePass } from "~~/lib/db/queries/passes";
+import { findValidPass, updatePass } from "~~/lib/db/queries/passes";
 import { createPayment } from "~~/lib/db/queries/payments";
 import { InsertPaymentSchema } from "~~/lib/db/schema";
 
@@ -26,7 +26,7 @@ export default defineAuthenticatedEventHandler(async (event) => {
   }
 
   if (result.data.passId) {
-    const passToUpdate = await findPass(result.data.passId, event.context.user.id);
+    const passToUpdate = await findValidPass(result.data.passId, event.context.user.id);
     if (!passToUpdate) {
       return sendError(event, createError({
         statusCode: 404,

@@ -64,6 +64,15 @@ defineExpose({
             </VaButton>
             <VaDivider />
             <VaButton
+              v-if="authStore.user?.role?.includes('admin')"
+              preset="secondary"
+              text-color="#fff"
+              :to="localePath('admin')"
+            >
+              {{ $t("navbar.admin") }}
+            </VaButton>
+            <VaDivider />
+            <VaButton
               v-for="route in routes"
               :key="route.name"
               preset="secondary"

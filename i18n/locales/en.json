@@ -8,7 +8,8 @@
     "login": "Login",
     "my-profile": "Profile",
     "index": "Home",
-    "booking": "Booking"
+    "booking": "Booking",
+    "admin": "Admin"
   },
   "brand_name": "Csodaszarvas Íjászbarlang",
   "pages": {
@@ -83,6 +84,59 @@
       "hours": "hour(s)",
       "expires_at": "Expires at",
       "credits_remaining": "Pass credits remaining"
+    },
+    "admin": {
+      "title": "Admin panel",
+      "tiles": {
+        "users": {
+          "title": "Users",
+          "description": "Manage users here."
+        }
+      },
+      "users": {
+        "title": "Users",
+        "columns": {
+          "id": "ID",
+          "name": "Name",
+          "email": "Email",
+          "created_at": "Registered At",
+          "actions": "Actions"
+        }
+      },
+      "passes": {
+        "title": "Passes",
+        "columns": {
+          "id": "ID",
+          "actions": "Actions",
+          "credit_type": "Credit Type",
+          "expires_at": "Expires At",
+          "created_at": "Created At",
+          "credits_remaining": "Credits Remaining",
+          "user": "Owner"
+        },
+        "fields": {
+          "user": "User",
+          "credit_type": "Credit Type",
+          "credits_total": "Total credits",
+          "credits_remaining": "Remaining credits",
+          "expires_at": "Expiration date"
+        },
+        "issue_pass": "Issue pass",
+        "edit_pass": "Edit pass",
+        "cancel": "Cancel",
+        "save": "Save",
+        "select_user": "Select user",
+        "equipment_option_rent": "Lane and equipment rental",
+        "equipment_option_use_own": "Lane (with own equipment)",
+        "delete_pass_confirm_title": "Delete pass",
+        "delete_pass_confirm_message": "Are you sure you want to delete this pass? This action cannot be undone."
+      }
+    }
+  },
+  "common": {
+    "credit_types": {
+      "regular": "Lane (with own equipment)",
+      "regular_with_rental": "Lane and equipment rental"
     }
   },
   "vuestic": {
@@ -154,5 +208,36 @@
     "inputField": "Input field",
     "fileTypeIncorrect": "File type is incorrect",
     "select": "Select an option"
+  },
+  "ag_grid": {
+    "page": "Page",
+    "of": "of",
+    "to": "to",
+    "more": "More",
+    "next": "Next",
+    "last": "Last",
+    "first": "First",
+    "previous": "Previous",
+    "filter": "Filter",
+    "contains": "Contains",
+    "notContains": "Not contains",
+    "equals": "Equals",
+    "notEqual": "Not equal",
+    "startsWith": "Starts with",
+    "endsWith": "Ends with",
+    "blank": "Blank",
+    "notBlank": "Not blank",
+    "and": "AND",
+    "or": "OR",
+    "applyFilter": "Apply",
+    "resetFilter": "Reset",
+    "clearFilter": "Clear",
+    "pinColumn": "Pin Column",
+    "autosizeThisColumn": "Autosize This Column",
+    "autosizeAllColumns": "Autosize All Columns",
+    "noRowsToShow": "No rows to show",
+    "loading": "Loading...",
+    "selectAll": "Select All",
+    "search": "Search"
   }
 }

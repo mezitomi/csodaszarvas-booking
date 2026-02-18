@@ -3,7 +3,7 @@ import { useAuthStore } from "~~/stores/auth";
 import { usePassesStore } from "~~/stores/passes";
 
 definePageMeta({
-  middleware: ["route"],
+  middleware: ["logged-in"],
 });
 const authStore = useAuthStore();
 const passesStore = usePassesStore();

@@ -7,7 +7,7 @@ useHead({
   titleTemplate: null,
 });
 definePageMeta({
-  middleware: ["route"],
+  middleware: ["logged-in"],
 });
 
 const localePath = useLocalePath();

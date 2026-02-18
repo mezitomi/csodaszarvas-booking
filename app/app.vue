@@ -5,6 +5,8 @@
 </template>
 
 <style lang="scss">
+@use "@vuestic/ag-grid-theme/scss";
+
 @font-face {
   font-family: "Dancing"; /* fpr signature */
   src:

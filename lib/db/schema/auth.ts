@@ -1,4 +1,8 @@
 import { int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { createSelectSchema, createUpdateSchema } from "drizzle-zod";
+import { z } from "zod/v4";
+
+import { USER_ROLE_ADMIN, USER_ROLE_USER } from "../../../app/utils/constants";
 
 export const user = sqliteTable("user", {
   id: int().primaryKey({ autoIncrement: true }),
@@ -13,6 +17,25 @@ export const user = sqliteTable("user", {
   banReason: text(),
   banExpires: integer(),
 });
+
+export const UserSchema = createSelectSchema(user);
+export type UserType = z.infer<typeof UserSchema>;
+
+export const UpdateUserSchema = createUpdateSchema(user, {
+  id: z.number(),
+  role: z.enum([USER_ROLE_USER, USER_ROLE_ADMIN]),
+  banned: z.boolean().optional(),
+  banExpires: z.number().optional(),
+  banReason: z.string().optional(),
+}).omit({
+  name: true,
+  email: true,
+  emailVerified: true,
+  image: true,
+  createdAt: true,
+  updatedAt: true,
+});
+export type UpdateUserType = z.infer<typeof UpdateUserSchema>;
 
 export const session = sqliteTable("session", {
   id: int().primaryKey({ autoIncrement: true }),

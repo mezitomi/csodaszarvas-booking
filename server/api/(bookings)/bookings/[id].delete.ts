@@ -1,5 +1,5 @@
 import { findBooking, updateBooking } from "~~/lib/db/queries/bookings";
-import { findPass, updatePass } from "~~/lib/db/queries/passes";
+import { findValidPass, updatePass } from "~~/lib/db/queries/passes";
 import { findPayment } from "~~/lib/db/queries/payments";
 import { updateLaneAvailability } from "~~/lib/db/queries/slots";
 import { CancelBookingSchema } from "~~/lib/db/schema";
@@ -59,7 +59,7 @@ export default defineAuthenticatedEventHandler(async (event) => {
 
     if (paymentToRefund.passId && paymentToRefund.lanesFromPass && paymentToRefund.paymentStatus === PAYMENT_STATUS_PAID) {
       // refund to pass by adding credits back
-      const passToUpdate = await findPass(paymentToRefund.passId, event.context.user.id);
+      const passToUpdate = await findValidPass(paymentToRefund.passId, event.context.user.id);
       if (!passToUpdate) {
         return sendError(event, createError({
           statusCode: 404,

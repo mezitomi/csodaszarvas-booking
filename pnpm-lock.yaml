@@ -26,12 +26,21 @@ importers:
       '@sentry/nuxt':
         specifier: ^10.38.0
         version: 10.38.0(76368aab904fa463a058923ca0cb30ca)
+      '@vuestic/ag-grid-theme':
+        specifier: ^1.2.0
+        version: 1.2.0(typescript@5.9.3)(vuestic-ui@1.10.3(vue@3.5.28(typescript@5.9.3)))
       '@vuestic/nuxt':
         specifier: ^1.0.21
         version: 1.0.21(@libsql/client@0.15.15)(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@types/node@25.2.3)(@vue/compiler-sfc@3.5.28)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.15.15)(drizzle-orm@0.44.7(@libsql/client@0.15.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.11)))(drizzle-orm@0.44.7(@libsql/client@0.15.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.11))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.2)(magicast@0.5.2)(optionator@0.9.4)(rollup@4.57.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(vue@3.5.28(typescript@5.9.3))(yaml@2.8.2)
       '@vueuse/nuxt':
         specifier: 13.9.0
         version: 13.9.0(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.15.15)(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@types/node@25.2.3)(@vue/compiler-sfc@3.5.28)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.15.15)(drizzle-orm@0.44.7(@libsql/client@0.15.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.11)))(drizzle-orm@0.44.7(@libsql/client@0.15.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.11))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.2)(magicast@0.5.2)(optionator@0.9.4)(rollup@4.57.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(yaml@2.8.2))(vue@3.5.28(typescript@5.9.3))
+      ag-grid-community:
+        specifier: ^35.1.0
+        version: 35.1.0
+      ag-grid-vue3:
+        specifier: ^35.1.0
+        version: 35.1.0(vue@3.5.28(typescript@5.9.3))
       better-auth:
         specifier: ^1.4.18
         version: 1.4.18(drizzle-kit@0.31.9)(drizzle-orm@0.44.7(@libsql/client@0.15.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.11))(vue@3.5.28(typescript@5.9.3))
@@ -102,6 +111,18 @@ importers:
         version: 0.5.22
 
 packages:
+
+  '@ag-grid-community/client-side-row-model@32.3.9':
+    resolution: {integrity: sha512-/x6gPhxn6c/QQSmDuNf81xrBNc3TKGymmokznvXPPf4tAXeLZn5kF0cW3sGa52XyqZcIsYFQvLkI+pCsX+I4ng==}
+
+  '@ag-grid-community/core@32.3.9':
+    resolution: {integrity: sha512-oZeAEPgaJVMzfKqbAPCyadcN5+iy+tjvhRLqEYJdBxtLgW/s2s0qXcXQvnrz7eUMD3Z7h3BQRVt2h/p0T6Ox/w==}
+
+  '@ag-grid-community/styles@32.3.9':
+    resolution: {integrity: sha512-uPNR5EXeQqAIC0gohmY7CJ97cTIA/JtNSqAUzJ8AdVZcz4dbk9JJIl9DRFUYL+qWhMY+fUSTw2a+Yi6aOGSs8A==}
+
+  '@ag-grid-community/vue3@32.3.9':
+    resolution: {integrity: sha512-9NNdsH5C0mv5CabVbDptetYVisuBXmv1W9R5XvtUpMSEiTKbse9wh4fWcdFFB+eTABBJXdee9B0YVbDf1CmGfw==}
 
   '@antfu/eslint-config@4.19.0':
     resolution: {integrity: sha512-IQlML0cc7qNA1Uk55raMRZjOmh26rkX3bi2MFYjhO+VOtTQt8Mz2ngxBlIwpTgZFgfuYjle6JPuOuALnEZHDFw==}
@@ -3017,6 +3038,11 @@ packages:
   '@vue/shared@3.5.28':
     resolution: {integrity: sha512-cfWa1fCGBxrvaHRhvV3Is0MgmrbSCxYTXCSCau2I0a1Xw1N1pHAvkWCiXPRAqjvToILvguNyEwjevUqAuBQWvQ==}
 
+  '@vuestic/ag-grid-theme@1.2.0':
+    resolution: {integrity: sha512-mBCgigueINfw+DWga4U7BxPMoZSrIkyr8dUmj2nFuJx66rAww25hT5x7jv/LKMDkK+tGhgO+6lhCmJ13ia3TXg==}
+    peerDependencies:
+      vuestic-ui: ^1.10.0
+
   '@vuestic/nuxt@1.0.21':
     resolution: {integrity: sha512-F2qNYCXaakoC0tuoJSbLLKIfaegIQeKxtrk4/jYbxksX+ZjiiW1neIxbKX+gBT23capB/6zHfm7UJ3ZdyL1RrA==}
 
@@ -3081,6 +3107,20 @@ packages:
     resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  ag-charts-types@10.3.9:
+    resolution: {integrity: sha512-drcRiJVencliC8LnRwk4MmeQDNNBg5GzmOoLFihO3/k0CUK0VF/N+2nc7iFozwaNG0btSB9vAhYuJLjqHMtRrQ==}
+
+  ag-charts-types@13.1.0:
+    resolution: {integrity: sha512-DytRM3CXli+Y013SC1Mr8lQBrhVTACK+11ilDHOhwUM0sRpmGuR51XFGcBKOliW1Vas1AycP31Cm3Pp0jx3hqw==}
+
+  ag-grid-community@35.1.0:
+    resolution: {integrity: sha512-yWFQfRNjv3KUBkHHzFdDOYGjPcDMU0B8Up4qG651diFlGRUGEGVs94SK73niWvk1FDZdpV9oWrwq3f30/qAoVg==}
+
+  ag-grid-vue3@35.1.0:
+    resolution: {integrity: sha512-BvM7yrFxRB/r5hZ4xSyE6T2lU2Rj+Ls6RH5tTu/n8DmhCTmLj4QCEkoU7EuaE0/Az3uEHOubYMaCX4jcDf181A==}
+    peerDependencies:
+      vue: ^3.5.0
 
   agent-base@6.0.2:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
@@ -6757,6 +6797,25 @@ packages:
 
 snapshots:
 
+  '@ag-grid-community/client-side-row-model@32.3.9':
+    dependencies:
+      '@ag-grid-community/core': 32.3.9
+      tslib: 2.8.1
+
+  '@ag-grid-community/core@32.3.9':
+    dependencies:
+      ag-charts-types: 10.3.9
+      tslib: 2.8.1
+
+  '@ag-grid-community/styles@32.3.9': {}
+
+  '@ag-grid-community/vue3@32.3.9(typescript@5.9.3)':
+    dependencies:
+      '@ag-grid-community/core': 32.3.9
+      vue: 3.5.28(typescript@5.9.3)
+    transitivePeerDependencies:
+      - typescript
+
   '@antfu/eslint-config@4.19.0(@vue/compiler-sfc@3.5.28)(eslint-plugin-format@1.4.0(eslint@9.39.2(jiti@2.6.1)))(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
       '@antfu/install-pkg': 1.1.0
@@ -9893,6 +9952,16 @@ snapshots:
 
   '@vue/shared@3.5.28': {}
 
+  '@vuestic/ag-grid-theme@1.2.0(typescript@5.9.3)(vuestic-ui@1.10.3(vue@3.5.28(typescript@5.9.3)))':
+    dependencies:
+      '@ag-grid-community/client-side-row-model': 32.3.9
+      '@ag-grid-community/core': 32.3.9
+      '@ag-grid-community/styles': 32.3.9
+      '@ag-grid-community/vue3': 32.3.9(typescript@5.9.3)
+      vuestic-ui: 1.10.3(vue@3.5.28(typescript@5.9.3))
+    transitivePeerDependencies:
+      - typescript
+
   '@vuestic/nuxt@1.0.21(@libsql/client@0.15.15)(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.6)(@types/node@25.2.3)(@vue/compiler-sfc@3.5.28)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.15.15)(drizzle-orm@0.44.7(@libsql/client@0.15.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.11)))(drizzle-orm@0.44.7(@libsql/client@0.15.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.11))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.2)(magicast@0.5.2)(optionator@0.9.4)(rollup@4.57.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(vue@3.5.28(typescript@5.9.3))(yaml@2.8.2)':
     dependencies:
       '@nuxt/kit': 3.21.1(magicast@0.5.2)
@@ -10036,6 +10105,19 @@ snapshots:
       acorn: 8.15.0
 
   acorn@8.15.0: {}
+
+  ag-charts-types@10.3.9: {}
+
+  ag-charts-types@13.1.0: {}
+
+  ag-grid-community@35.1.0:
+    dependencies:
+      ag-charts-types: 13.1.0
+
+  ag-grid-vue3@35.1.0(vue@3.5.28(typescript@5.9.3)):
+    dependencies:
+      ag-grid-community: 35.1.0
+      vue: 3.5.28(typescript@5.9.3)
 
   agent-base@6.0.2:
     dependencies:

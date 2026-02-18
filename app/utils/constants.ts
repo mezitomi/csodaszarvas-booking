@@ -16,6 +16,10 @@ export const ROUTE_CREATE_BOOKING = "/api/bookings";
 export const ROUTE_USER_PASSES = "/api/passes";
 export const ROUTE_CREATE_BOOKING_PAYMENT = "/api/bookings/[bookingId]/payment";
 
+export const ROUTE_ADMIN_USERS = "/api/admin/users";
+export const ROUTE_ADMIN_PASSES = "/api/admin/passes";
+export const ROUTE_ADMIN_PASSES_ID = "/api/admin/passes/[passId]";
+
 export const CREDIT_TYPE_RENTAL = "regular_with_rental";
 export const CREDIT_TYPE_REGULAR = "regular";
 
@@ -30,3 +34,8 @@ export const PAYMENT_STATUS_REFUNDED = "refunded";
 export const PAYMENT_STATUS_PENDING = "pending";
 export const PaymentStatusTypes = [PAYMENT_STATUS_PAID, PAYMENT_STATUS_REFUNDED, PAYMENT_STATUS_PENDING] as const;
 export type PaymentStatus = (typeof PaymentStatusTypes)[number];
+
+export const USER_ROLE_USER = "user";
+export const USER_ROLE_ADMIN = "admin";
+export const UserRoles = [USER_ROLE_USER, USER_ROLE_ADMIN] as const;
+export type UserRole = (typeof UserRoles)[number];

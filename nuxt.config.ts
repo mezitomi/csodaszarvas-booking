@@ -165,28 +165,36 @@ export default defineNuxtConfig({
       },
     ],
     pages: {
-      profile: {
+      "profile": {
         en: "/profile",
         hu: "/profilom",
       },
-      login: {
+      "login": {
         en: "/login",
         hu: "/bejelentkezes",
       },
-      booking: {
+      "booking": {
         en: "/booking",
         hu: "/foglalas",
       },
-      index: {
+      "index": {
         en: "/",
         hu: "/",
+      },
+      "admin": {
+        en: "/admin",
+        hu: "/admin",
+      },
+      "admin-users": {
+        en: "/admin/users",
+        hu: "/admin/felhasznalok",
       },
     },
   },
   sentry: {
     sourceMapsUploadOptions: {
       org: "mezitomi",
-      project: "csodaszarvas",
+      project: "csodaszarvas-booking",
     },
 
     autoInjectServerSentry: "top-level-import",

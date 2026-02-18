@@ -8,7 +8,8 @@
     "login": "Bejelentkezés",
     "index": "Főoldal",
     "my-profile": "Profilom",
-    "booking": "Foglalás"
+    "booking": "Foglalás",
+    "admin": "Admin"
   },
   "brand_name": "Csodaszarvas Íjászbarlang",
   "pages": {
@@ -79,6 +80,58 @@
       "hours": "óra",
       "expires_at": "Lejárat",
       "credits_remaining": "Hátralévő bérlet kreditek"
+    },
+    "admin": {
+      "title": "Admin felület",
+      "tiles": {
+        "users": {
+          "title": "Felhasználók",
+          "description": "Itt kezelheted a felhasználókat."
+        }
+      },
+      "users": {
+        "title": "Felhasználók",
+        "columns": {
+          "id": "ID",
+          "name": "Név",
+          "email": "E-mail",
+          "created_at": "Regisztrált",
+          "actions": "Műveletek"
+        }
+      },
+      "passes": {
+        "title": "Bérletek",
+        "columns": {
+          "id": "ID",
+          "credit_type": "Bérlet típus",
+          "actions": "Műveletek",
+          "expires_at": "Lejárat",
+          "created_at": "Létrehozva",
+          "credits_remaining": "Hátralévő kreditek",
+          "user": "Tulajdonos"
+        },
+        "fields": {
+          "user": "Felhasználó",
+          "credit_type": "Bérlet típus",
+          "credits_total": "Kreditek száma",
+          "credits_remaining": "Megmaradt kreditek száma",
+          "expires_at": "Lejárat dátuma"
+        },
+        "issue_pass": "Bérlet kiadása",
+        "edit_pass": "Bérlet szerkesztése",
+        "cancel": "Mégse",
+        "save": "Mentés",
+        "select_user": "Kiválasztás",
+        "equipment_option_rent": "Pálya és felszerelés",
+        "equipment_option_use_own": "Pálya (saját felszereléssel)",
+        "delete_pass_confirm_message": "Biztosan törölni szeretnéd ezt a bérletet? Ez a művelet nem vonható vissza."
+      }
+    }
+  },
+  "common": {
+    "credit_types": {
+      "regular": "Pálya (saját felszereléssel)",
+      "regular_with_rental": "Pálya és felszerelés"
     }
   },
   "vuestic": {
@@ -150,5 +203,36 @@
     "inputField": "Beviteli mező",
     "fileTypeIncorrect": "Helytelen fájltípus",
     "select": "Válassz egy opciót"
+  },
+  "ag_grid": {
+    "page": "Oldal",
+    "of": "/",
+    "to": "-",
+    "more": "Több",
+    "next": "Következő",
+    "last": "Utolsó",
+    "first": "Első",
+    "previous": "Előző",
+    "filter": "Szűrő",
+    "contains": "Tartalmazza",
+    "notContains": "Nem tartalmazza",
+    "equals": "Egyenlő",
+    "notEqual": "Nem egyenlő",
+    "startsWith": "Ezzel kezdődik",
+    "endsWith": "Erre végződik",
+    "blank": "Üres",
+    "notBlank": "Nem üres",
+    "and": "ÉS",
+    "or": "VAGY",
+    "applyFilter": "Alkalmaz",
+    "resetFilter": "Visszaállít",
+    "clearFilter": "Töröl",
+    "pinColumn": "Oszlop rögzítése",
+    "autosizeThisColumn": "Oszlop automatikus méretezése",
+    "autosizeAllColumns": "Összes oszlop automatikus méretezése",
+    "noRowsToShow": "Nincsenek megjeleníthető sorok",
+    "loading": "Betöltés...",
+    "selectAll": "Összes kijelölése",
+    "search": "Keresés"
   }
 }

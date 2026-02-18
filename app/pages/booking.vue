@@ -9,7 +9,7 @@ import { ref } from "vue";
 import { defineVaStepperSteps, useForm as vuesticUseForm } from "vuestic-ui";
 
 definePageMeta({
-  middleware: ["route"],
+  middleware: ["logged-in"],
 });
 const { t, locale } = useI18n();
 const title = t("brand_name");
@@ -23,6 +23,15 @@ const model = ref({
   duration: undefined as undefined | number,
   creditType: undefined as undefined | CreditType,
   selectedSlot: undefined as undefined | string,
+});
+
+const computedCreditType = computed({
+  get() {
+    return model.value.creditType;
+  },
+  set(newValue: { text: string; value: string }) {
+    model.value.creditType = newValue.value as CreditType;
+  },
 });
 
 const reservationId = ref<number | null>(null);
@@ -42,7 +51,8 @@ const { confirm } = useModal();
 const { $csrfFetch } = useNuxtApp();
 const localePath = useLocalePath();
 
-vuesticUseForm("stepForm");
+const stepForm = ref();
+vuesticUseForm(stepForm);
 
 const selectedDate = ref<Date | null>(null);
 
@@ -84,7 +94,7 @@ const steps = ref(defineVaStepperSteps([
   {
     label: t("pages.booking.step_4_equipment_selection_title"),
     beforeLeave: async (step) => {
-      step.hasError = model.value.creditType === undefined;
+      step.hasError = computedCreditType.value === undefined;
       return !step.hasError;
     },
   },
@@ -127,7 +137,7 @@ async function reserveBooking() {
       startTime: Date.parse(model.value.selectedSlot!),
       durationHours: model.value.duration,
       lanesBooked: model.value.lanes,
-      equipmentNeeded: Number(model.value.creditType === CREDIT_TYPE_RENTAL),
+      equipmentNeeded: Number(computedCreditType.value === CREDIT_TYPE_RENTAL),
     },
   })
     .catch((error) => {
@@ -157,7 +167,6 @@ async function payWithCard() {
         <h1>{{ $t("brand_name") }}</h1>
       </template>
     </CsArrowSeparator>
-    <!-- eslint-disable-next-line vue/no-unused-refs -->
     <VaForm ref="stepForm">
       <VaStepper
         v-model="currentStep"
@@ -194,7 +203,7 @@ async function payWithCard() {
         <template #step-content-3>
           <p>{{ $t("pages.booking.step_4_equipment_selection_description") }}</p>
           <VaRadio
-            v-model="model.creditType"
+            v-model="computedCreditType"
             :options="[
               {
                 text: t('pages.booking.equipment_option_use_own'),
@@ -221,8 +230,8 @@ async function payWithCard() {
             <p v-if="model.lanes">
               {{ $t("pages.booking.lanes") }}: {{ model.lanes }}
             </p>
-            <p v-if="model.creditType">
-              {{ $t("pages.booking.equipment") }}: {{ model.creditType === CREDIT_TYPE_REGULAR ? t('pages.booking.equipment_option_use_own') : t('pages.booking.equipment_option_rent') }}
+            <p v-if="computedCreditType">
+              {{ $t("pages.booking.equipment") }}: {{ computedCreditType === CREDIT_TYPE_REGULAR ? t('pages.booking.equipment_option_use_own') : t('pages.booking.equipment_option_rent') }}
             </p>
             <VaButton @click="reserveBooking">
               {{ $t("pages.booking.proceed_to_payment") }}
@@ -247,7 +256,7 @@ async function payWithCard() {
                 <p>
                   {{ pass.creditsRemaining }} {{ $t('pages.booking.credits_remaining') }}
                 </p>
-                <VaButton v-if="pass.creditType === model.creditType" @click="payWithPass(pass)">
+                <VaButton v-if="pass.creditType === computedCreditType" @click="payWithPass(pass)">
                   {{ $t('pages.booking.use_pass') }}
                 </VaButton>
                 <VaPopover v-else :message="$t('pages.booking.incompatible_pass')">
@@ -269,8 +278,8 @@ async function payWithCard() {
       <p v-if="model.duration">
         Időtartam: {{ model.duration }} óra
       </p>
-      <p v-if="model.creditType">
-        Felszerelés: {{ model.creditType === CREDIT_TYPE_REGULAR ? t('pages.booking.equipment_option_use_own') : t('pages.booking.equipment_option_rent') }}
+      <p v-if="computedCreditType">
+        Felszerelés: {{ computedCreditType === CREDIT_TYPE_REGULAR ? t('pages.booking.equipment_option_use_own') : t('pages.booking.equipment_option_rent') }}
       </p>
       <p v-if="model.selectedSlot">
         Kiválasztott időpont: {{ new Date(model.selectedSlot).toLocaleString(locale) }}
