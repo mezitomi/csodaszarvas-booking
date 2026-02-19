@@ -45,22 +45,38 @@ export async function getAvailableSlots(lanes: number, duration: number): Promis
   return filteredAvailabilities.map(slot => new Date(slot.startTime).toISOString());
 };
 
-export async function updateLaneAvailability(booking: BookingType) {
+type TxParam = Parameters<typeof db.transaction>[0] extends (tx: infer T) => any ? T : never;
+
+export async function updateLaneAvailability(booking: BookingType, tx?: TxParam): Promise<boolean> {
   const { startTime, durationHours, lanesBooked } = booking;
 
   const laneChange = booking.status === BOOKING_STATUS_CANCELLED ? lanesBooked : -lanesBooked;
 
-  const slotsToUpdate = await db.query.laneAvailability.findMany({
-    where: availability => and(
-      gte(availability.startTime, startTime),
-      lt(availability.startTime, startTime + durationHours * 60 * 60 * 1000),
-    ),
+  const success = await (tx ?? db).transaction(async (tx1) => {
+    const slotsToUpdate = await tx1.query.laneAvailability.findMany({
+      where: availability => and(
+        gte(availability.startTime, startTime),
+        lt(availability.startTime, startTime + durationHours * 60 * 60 * 1000),
+      ),
+    });
+
+    slotsToUpdate.forEach(async (slot) => {
+      const newAvailableLanes = Math.max(Math.min(slot.availableLanes + laneChange, MAX_LANES), 0); // Ensure available lanes stay within 0 and MAX_LANES
+      const [updated] = await tx1.update(laneAvailability)
+        .set({ availableLanes: newAvailableLanes, updatedAt: Date.now() })
+        .where(eq(laneAvailability.id, slot.id))
+        .returning();
+
+      if (!updated || updated.availableLanes < 0 || updated.availableLanes > MAX_LANES) {
+        console.error(`Failed to update lane availability for slot ID ${slot.id}.`);
+
+        tx1.rollback(); // Rollback the transaction if any update fails or results in invalid lane counts
+        return false;
+      }
+    });
+
+    return true; // All updates succeeded
   });
 
-  slotsToUpdate.forEach(async (slot) => {
-    const newAvailableLanes = Math.max(Math.min(slot.availableLanes + laneChange, MAX_LANES), 0); // Ensure available lanes stay within 0 and MAX_LANES
-    await db.update(laneAvailability)
-      .set({ availableLanes: newAvailableLanes, updatedAt: Date.now() })
-      .where(eq(laneAvailability.id, slot.id));
-  });
+  return success;
 }

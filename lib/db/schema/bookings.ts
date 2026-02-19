@@ -61,3 +61,41 @@ export const InsertBookingSchema = createInsertSchema(booking, {
   cancelledAt: true,
 });
 export type InsertBookingType = z.infer<typeof InsertBookingSchema>;
+
+export const PreserveSlotSchema = createInsertSchema(booking, {
+  startTime: z.number().gt(Date.now()),
+  equipmentNeeded: z.number().default(0),
+}).omit({
+  id: true,
+  userId: true,
+  createdBy: true,
+  createdAt: true,
+  updatedAt: true,
+  endTime: true,
+  participantCount: true,
+  status: true,
+  reservedUntil: true,
+  paymentDeadline: true,
+  cancelledAt: true,
+});
+export type PreserveSlotType = z.infer<typeof PreserveSlotSchema>;
+
+export const FinalizeBookingSchema = createUpdateSchema(booking, {
+  id: z.number(),
+}).omit({
+  userId: true,
+  createdBy: true,
+  createdAt: true,
+  updatedAt: true,
+  startTime: true,
+  endTime: true,
+  durationHours: true,
+  lanesBooked: true,
+  equipmentNeeded: true,
+  participantCount: true,
+  status: true,
+  reservedUntil: true,
+  paymentDeadline: true,
+  cancelledAt: true,
+});
+export type FinalizeBookingType = z.infer<typeof FinalizeBookingSchema>;

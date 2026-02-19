@@ -13,6 +13,7 @@ export const ROUTE_UPCOMING_BOOKINGS = "/api/bookings/upcoming";
 export const ROUTE_CANCEL_BOOKING = "/api/bookings/[bookingId]";
 export const ROUTE_AVAILABLE_SLOTS = "/api/slots/available";
 export const ROUTE_CREATE_BOOKING = "/api/bookings";
+export const ROUTE_PRESERVE_TIME_SLOT = "/api/bookings/preserve-slot";
 export const ROUTE_USER_PASSES = "/api/passes";
 export const ROUTE_CREATE_BOOKING_PAYMENT = "/api/bookings/[bookingId]/payment";
 
