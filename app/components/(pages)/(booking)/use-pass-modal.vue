@@ -40,7 +40,11 @@ const showModal = ref(false);
 <template>
   <VaModal v-model="showModal" hide-default-actions>
     <template #anchor="{ show }">
-      <VaButton :disabled="compatiblePasses.length === 0" @click="show()">
+      <VaButton
+        :disabled="compatiblePasses.length === 0"
+        class="trigger"
+        @click="show()"
+      >
         {{ $t("pages.booking.steps.pay_with_pass") }}
       </VaButton>
     </template>
@@ -87,5 +91,10 @@ const showModal = ref(false);
     transform: translateY(-5px);
   }
   inline-size: 300px;
+}
+
+.trigger {
+  inline-size: 100%;
+  max-inline-size: 200px;
 }
 </style>

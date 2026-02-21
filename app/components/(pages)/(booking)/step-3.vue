@@ -9,9 +9,25 @@ type Emits = {
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
+const { t } = useI18n();
+
+const options = computed(() => [
+  {
+    text: t("pages.booking.steps.equipment_option_use_own"),
+    value: CREDIT_TYPE_REGULAR,
+  },
+  {
+    text: t("pages.booking.steps.equipment_option_rent"),
+    value: CREDIT_TYPE_RENTAL,
+  },
+]);
 
 const computedCreditType = computed({
-  get: () => props.creditType,
+  get: () => {
+    return options.value.find(
+      opt => opt.value === props.creditType,
+    );
+  },
   set: (setValue: { text: string; value: CreditType }) => {
     if (setValue.value) {
       emit("update:credit-type", setValue.value);
@@ -23,20 +39,12 @@ const computedCreditType = computed({
 <template>
   <div class="container">
     <p>{{ $t("pages.booking.steps.select_equipment") }}</p>
-    <VaRadio
-      v-model="computedCreditType"
-      :options="[
-        {
-          text: $t('pages.booking.steps.equipment_option_use_own'),
-          value: CREDIT_TYPE_REGULAR,
-        },
-        {
-          text: $t('pages.booking.steps.equipment_option_rent'),
-          value:
-            CREDIT_TYPE_RENTAL,
-        },
-      ]"
-    />
+    <div class="select-wrapper">
+      <VaSelect
+        v-model="computedCreditType"
+        :options="options"
+      />
+    </div>
   </div>
 </template>
 
@@ -45,6 +53,15 @@ const computedCreditType = computed({
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
   max-inline-size: 800px;
+  margin: auto;
+  inline-size: 100%;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+
+  .select-wrapper {
+    max-inline-size: 220px;
+  }
 }
 </style>

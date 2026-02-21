@@ -21,6 +21,8 @@ bookingsStore.refreshBookings();
 const { $csrfFetch } = useNuxtApp();
 const { confirm } = useModal();
 
+const isMobile = useMediaQuery("(max-width: 575px)");
+
 function canBeCancelled(booking: Booking) {
   if (booking.endTime < Date.now())
     return false;
@@ -57,7 +59,6 @@ const colDefs = computed<ColDef[]>(() => [
   {
     field: "startTime",
     headerName: t("grids.bookings.columns.start_time"),
-    width: 100,
     valueFormatter: params => new Date(params.data?.startTime).toLocaleString(locale.value, {
       year: "numeric",
       month: "short",
@@ -65,16 +66,19 @@ const colDefs = computed<ColDef[]>(() => [
       hour: "2-digit",
       minute: "2-digit",
     }),
+    flex: isMobile.value ? 2 : undefined,
   },
   {
     field: "Szolgáltatás",
     headerName: t("grids.bookings.columns.service"),
     valueGetter: params => params?.data?.equipmentNeeded ? t("pages.index.lane_and_equipment") : t("pages.index.lane"),
+    hide: isMobile.value,
   },
   {
     field: "Részletek",
     headerName: t("grids.bookings.columns.details"),
     valueGetter: params => `${params.data?.lanesBooked} ${t("pages.index.lanes")} - ${params.data?.durationHours} ${t("pages.index.hours")}`,
+    hide: isMobile.value,
   },
   {
     field: "status",
@@ -85,7 +89,6 @@ const colDefs = computed<ColDef[]>(() => [
     field: "actions",
     headerName: t("grids.bookings.columns.actions"),
     cellRenderer: CsUpcomingBookingsActionsCell,
-    width: 120,
     sortable: false,
     filter: false,
     resizable: false,
@@ -138,6 +141,7 @@ const gridOptions = computed(() => ({
 .grid-container {
   block-size: 400px;
   inline-size: 100%;
+  margin-block-start: 1rem;
 }
 .container {
   max-inline-size: 1000px;

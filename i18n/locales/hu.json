@@ -48,8 +48,8 @@
       "email": "Email",
       "registered_at": "Regisztráció dátuma",
       "passes": "Bérletek",
-      "passes_info": "Bérleted adatai",
-      "no_passes": "Nincsenek bérleteid."
+      "no_passes": "Nincsenek bérleteid.",
+      "account_info": "Fiók adatai"
     },
     "login": {
       "title": "A folytatáshoz kérjük, jelentkezz be."

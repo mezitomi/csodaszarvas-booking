@@ -34,6 +34,7 @@ definePageMeta({
 .container {
   display: flex;
   flex-direction: column;
+
   gap: 50px;
   margin: auto;
   max-inline-size: 1000px;
@@ -47,6 +48,7 @@ definePageMeta({
     gap: 20px;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .va-card {

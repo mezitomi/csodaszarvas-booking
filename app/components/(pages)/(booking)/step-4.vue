@@ -39,3 +39,13 @@ const { locale } = useI18n();
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-inline-size: 800px;
+  margin: auto;
+}
+</style>

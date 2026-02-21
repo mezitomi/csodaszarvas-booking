@@ -43,6 +43,10 @@ const localePath = useLocalePath();
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 575px) {
+    margin-inline: 1rem;
+  }
+
   .arrow-separator,
   .greeting-card,
   .upcoming-bookings {

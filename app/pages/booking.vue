@@ -26,7 +26,7 @@ const model = reactive<modelType>({
   currentStep: 0,
   lanes: 1,
   duration: 1,
-  creditType: null,
+  creditType: CREDIT_TYPE_RENTAL,
   selectedSlot: null,
   reservation: null,
 });
@@ -156,6 +156,7 @@ const steps = ref(defineVaStepperSteps([
         <template #controls="{ nextStep, prevStep }">
           <div class="btn-container">
             <VaButton
+              v-if="model.currentStep !== 4"
               class="btn"
               :disabled="model.currentStep === 0 || model.currentStep === 4"
               @click="prevStep()"
@@ -163,6 +164,7 @@ const steps = ref(defineVaStepperSteps([
               {{ $t("pages.booking.steps.back") }}
             </VaButton>
             <VaButton
+              v-if="model.currentStep !== 4"
               class="btn"
               @click="nextStep()"
             >
@@ -204,6 +206,17 @@ const steps = ref(defineVaStepperSteps([
 .container {
   max-inline-size: 1000px;
   margin-inline: auto;
+
+  :deep(.va-stepper__step-button__icon) {
+    display: none;
+  }
+}
+
+:deep(.va-stepper__navigation--vertical) {
+  @media (max-width: 575px) {
+    margin-inline: 1rem;
+    padding-inline-start: 0;
+  }
 }
 
 :deep(.va-radio__square) {
@@ -218,6 +231,5 @@ const steps = ref(defineVaStepperSteps([
 
 .btn {
   inline-size: 100%;
-  max-inline-size: 20%;
 }
 </style>

@@ -23,8 +23,23 @@ async function payWithCard() {
     <p>{{ $t("pages.booking.steps.select_payment") }}</p>
 
     <UsePassModal :compatible-passes="props.compatiblePasses" :model="props.model" />
-    <VaButton @click="payWithCard">
+    <VaButton class="trigger" @click="payWithCard">
       {{ $t("pages.booking.steps.pay_with_card") }}
     </VaButton>
   </div>
 </template>
+
+<style scoped lang="scss">
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-inline-size: 800px;
+  margin: auto;
+}
+
+.trigger {
+  inline-size: 100%;
+  max-inline-size: 200px;
+}
+</style>
