@@ -53,8 +53,8 @@
       "email": "Email",
       "registered_at": "Registered at",
       "passes": "Passes",
-      "passes_info": "Pass details",
-      "no_passes": "You have no passes."
+      "no_passes": "You have no passes.",
+      "account_info": "Account information"
     },
     "booking": {
       "steps": {
@@ -98,6 +98,14 @@
         "passes": {
           "title": "Passes",
           "description": "Manage passes here."
+        },
+        "slots": {
+          "title": "Slots",
+          "description": "Manage bookable time slots here."
+        },
+        "openings": {
+          "title": "Openings",
+          "description": "Manage opening hours here."
         }
       },
       "users": {
@@ -110,6 +118,27 @@
         "select_user": "Select user",
         "delete_pass_confirm_title": "Delete pass",
         "delete_pass_confirm_message": "Are you sure you want to delete this pass? This action cannot be undone."
+      },
+      "slots": {
+        "title": "Slots"
+      },
+      "openings": {
+        "title": "Openings",
+        "special_hours": "Special Hours",
+        "closed": "Closed",
+        "days": {
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "sunday": "Sunday"
+        },
+        "validation": {
+          "invalid_lanes": "Must be a number 0 or greater",
+          "update_failed": "Failed to update. Please try again."
+        }
       }
     }
   },
@@ -175,6 +204,15 @@
           "email": "Email",
           "created_at": "Registered At",
           "actions": "Actions"
+        }
+      },
+      "openings": {
+        "day": {
+          "columns": {
+            "hours": "Time",
+            "lanes": "Lanes",
+            "actions": "Actions"
+          }
         }
       }
     },

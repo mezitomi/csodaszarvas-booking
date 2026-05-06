@@ -26,6 +26,12 @@ definePageMeta({
           <p>{{ $t('pages.admin.tiles.passes.description') }}</p>
         </VaCardContent>
       </VaCard>
+      <VaCard @click="navigateTo($localePath('admin-openings'))">
+        <VaCardTitle>{{ $t('pages.admin.tiles.openings.title') }}</VaCardTitle>
+        <VaCardContent>
+          <p>{{ $t('pages.admin.tiles.openings.description') }}</p>
+        </VaCardContent>
+      </VaCard>
     </div>
   </div>
 </template>

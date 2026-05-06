@@ -41,6 +41,9 @@ importers:
       ag-grid-vue3:
         specifier: ^35.1.0
         version: 35.1.0(vue@3.5.28(typescript@5.9.3))
+      await-to-js:
+        specifier: ^3.0.0
+        version: 3.0.0
       better-auth:
         specifier: ^1.4.18
         version: 1.4.18(drizzle-kit@0.31.9)(drizzle-orm@0.44.7(@libsql/client@0.15.15)(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.11))(vue@3.5.28(typescript@5.9.3))
@@ -3207,6 +3210,10 @@ packages:
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
+
+  await-to-js@3.0.0:
+    resolution: {integrity: sha512-zJAaP9zxTcvTHRlejau3ZOY4V7SRpiByf3/dxx2uyKxxor19tpmpV2QRsTKikckwhaPmr2dVpxxMr7jOCYVp5g==}
+    engines: {node: '>=6.0.0'}
 
   b4a@1.7.3:
     resolution: {integrity: sha512-5Q2mfq2WfGuFp3uS//0s6baOJLMoVduPYVeNmDYxu5OUA1/cBfvr2RIS7vi62LdNj/urk1hfmj867I3qt6uZ7Q==}
@@ -10216,6 +10223,8 @@ snapshots:
       picocolors: 1.1.1
       postcss: 8.5.6
       postcss-value-parser: 4.2.0
+
+  await-to-js@3.0.0: {}
 
   b4a@1.7.3: {}
 

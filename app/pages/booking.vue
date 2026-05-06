@@ -4,6 +4,7 @@ import type { Ref } from "vue";
 
 import { useAvailableSlotsStore } from "~~/stores/available-slots";
 import { usePassesStore } from "~~/stores/passes";
+import { to } from "await-to-js";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import { defineVaStepperSteps, useForm as vuesticUseForm } from "vuestic-ui";
@@ -62,7 +63,7 @@ async function preserveTimeSlot() {
   if (!model.selectedSlot)
     return false;
 
-  const result = await $csrfFetch(ROUTE_PRESERVE_TIME_SLOT, {
+  const [error, result] = await to($csrfFetch(ROUTE_PRESERVE_TIME_SLOT, {
     method: "POST",
     body: {
       startTime: Date.parse(model.selectedSlot),
@@ -70,10 +71,12 @@ async function preserveTimeSlot() {
       lanesBooked: model.lanes,
       equipmentNeeded: model.creditType === CREDIT_TYPE_RENTAL ? 1 : 0,
     },
-  }).catch((error) => {
+  }));
+
+  if (error) {
     console.error("Error preserving time slot:", error);
     return false;
-  });
+  }
 
   model.reservation = result;
 
@@ -84,15 +87,17 @@ async function finalizeBookingDetails() {
   if (!model.reservation)
     return false;
 
-  await $csrfFetch(`${ROUTE_CREATE_BOOKING}/${model.reservation.id}/finalize`, {
+  const [error] = await to($csrfFetch(`${ROUTE_CREATE_BOOKING}/${model.reservation.id}/finalize`, {
     method: "POST",
     body: JSON.stringify({
       id: model.reservation.id,
     }),
-  }).catch((error) => {
+  }));
+
+  if (error) {
     console.error("Error finalizing booking:", error);
     return false;
-  });
+  }
 
   return true;
 }

@@ -2,6 +2,8 @@
 import type { PassTypeWithUser } from "~~/lib/db/queries/passes";
 import type { UpdatePassType } from "~~/lib/db/schema/pass";
 
+import { to } from "await-to-js";
+
 type Props = {
   modelValue: PassTypeWithUser | null;
   show: boolean;
@@ -34,15 +36,18 @@ async function cancel() {
 async function editPass(pass: UpdatePassType) {
   const path = ROUTE_ADMIN_PASSES_ID.replace("[passId]", pass.id.toString());
 
-  await $csrfFetch(path, {
+  const [error] = await to($csrfFetch(path, {
     method: "PUT",
     body: JSON.stringify(pass),
-  }).catch((err) => {
-    console.error("Failed to update pass:", err);
-  }).then(() => {
-    showModal.value = false;
-    emit("update:passes");
-  });
+  }));
+
+  if (error) {
+    console.error("Failed to update pass:", error);
+    return;
+  }
+
+  showModal.value = false;
+  emit("update:passes");
 }
 </script>
 

@@ -96,6 +96,14 @@
         "passes": {
           "title": "Bérletek",
           "description": "Itt kezelheted a bérleteket."
+        },
+        "slots": {
+          "title": "Időpontok",
+          "description": "Itt kezelheted a foglalható időpontokat."
+        },
+        "openings": {
+          "title": "Nyitvatartás",
+          "description": "Itt kezelheted a nyitvatartási időket."
         }
       },
       "users": {
@@ -107,6 +115,27 @@
         "edit_pass": "Bérlet szerkesztése",
         "select_user": "Kiválasztás",
         "delete_pass_confirm_message": "Biztosan törölni szeretnéd ezt a bérletet? Ez a művelet nem vonható vissza."
+      },
+      "slots": {
+        "title": "Időpontok"
+      },
+      "openings": {
+        "title": "Nyitvatartás",
+        "special_hours": "Speciális nyitvatartás",
+        "closed": "Zárva",
+        "days": {
+          "monday": "Hétfő",
+          "tuesday": "Kedd",
+          "wednesday": "Szerda",
+          "thursday": "Csütörtök",
+          "friday": "Péntek",
+          "saturday": "Szombat",
+          "sunday": "Vasárnap"
+        },
+        "validation": {
+          "invalid_lanes": "A értéknek 0 vagy nagyobbnak kell lennie",
+          "update_failed": "Sikertelen frissítés. Kérlek próbáld meg újra."
+        }
       }
     }
   },
@@ -172,6 +201,15 @@
           "email": "E-mail",
           "created_at": "Regisztráció dátuma",
           "actions": "Műveletek"
+        }
+      },
+      "openings": {
+        "day": {
+          "columns": {
+            "hours": "Idő",
+            "lanes": "Lőállások",
+            "actions": "Műveletek"
+          }
         }
       }
     },

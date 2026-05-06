@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { PassType } from "~~/lib/db/schema";
 
+import { to } from "await-to-js";
+
 import type { modelType } from "./step-4.vue";
 
 type Props = {
@@ -14,7 +16,7 @@ const { $csrfFetch } = useNuxtApp();
 const localePath = useLocalePath();
 
 async function payWithPass(pass: PassType) {
-  const paymentResult = await $csrfFetch(ROUTE_CREATE_BOOKING_PAYMENT.replace("[bookingId]", props.model.reservation!.id.toString()), {
+  const [error, paymentResult] = await to($csrfFetch(ROUTE_CREATE_BOOKING_PAYMENT.replace("[bookingId]", props.model.reservation!.id.toString()), {
     method: "POST",
     body: {
       bookingId: props.model.reservation!.id,
@@ -24,10 +26,11 @@ async function payWithPass(pass: PassType) {
       depositAmount: 0,
       paymentStatus: PAYMENT_STATUS_PAID,
     },
-  })
-    .catch((error) => {
-      console.error("Error applying pass to booking:", error);
-    });
+  }));
+
+  if (error) {
+    console.error("Error applying pass to booking:", error);
+  }
 
   if (paymentResult) {
     navigateTo(localePath("index"));

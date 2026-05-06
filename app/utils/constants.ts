@@ -20,6 +20,7 @@ export const ROUTE_CREATE_BOOKING_PAYMENT = "/api/bookings/[bookingId]/payment";
 export const ROUTE_ADMIN_USERS = "/api/admin/users";
 export const ROUTE_ADMIN_PASSES = "/api/admin/passes";
 export const ROUTE_ADMIN_PASSES_ID = "/api/admin/passes/[passId]";
+export const ROUTE_ADMIN_OPENINGS = "/api/admin/openings";
 
 export const CREDIT_TYPE_RENTAL = "regular_with_rental";
 export const CREDIT_TYPE_REGULAR = "regular";
