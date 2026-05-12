@@ -10,6 +10,7 @@ definePageMeta({
 
 const openingsStore = useAdminOpeningsStore();
 const { openings, updatingId } = storeToRefs(openingsStore);
+const { $csrfFetch } = useNuxtApp();
 
 const START_HOUR = 10;
 const END_HOUR = 19;
@@ -49,6 +50,20 @@ async function handleCellUpdate(openingId: number, lanes: number) {
 
 async function handleCellCreate(dayOfWeek: number, startHour: number, lanes: number) {
   await to(openingsStore.createOpening(dayOfWeek, startHour, lanes));
+}
+
+const isGenerating = ref(false);
+
+async function handleGenerateSlots() {
+  isGenerating.value = true;
+  const [err, result] = await to($csrfFetch("/api/admin/generate-slots", { method: "POST" }));
+  isGenerating.value = false;
+  if (err) {
+    console.error("Slot generation failed", err);
+  }
+  else {
+    console.warn("Slot generation result", result);
+  }
 }
 </script>
 
@@ -114,6 +129,13 @@ async function handleCellCreate(dayOfWeek: number, startHour: number, lanes: num
         title="Coming soon"
       >
         {{ $t("pages.admin.openings.special_hours") ?? "Speciális nyitvatartás" }}
+      </VaButton>
+      <VaButton
+        color="primary"
+        :loading="isGenerating"
+        @click="handleGenerateSlots"
+      >
+        {{ $t("pages.admin.openings.generate_slots") ?? "Slotok generálása" }}
       </VaButton>
     </div>
   </div>

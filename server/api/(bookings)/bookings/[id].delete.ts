@@ -1,5 +1,5 @@
 import { findBooking, updateBooking } from "~~/lib/db/queries/bookings";
-import { findValidPass, updatePass } from "~~/lib/db/queries/passes";
+import { findPassById, updatePass } from "~~/lib/db/queries/passes";
 import { findPayment } from "~~/lib/db/queries/payments";
 import { updateLaneAvailability } from "~~/lib/db/queries/slots";
 import { CancelBookingSchema } from "~~/lib/db/schema";
@@ -49,7 +49,7 @@ export default defineAuthenticatedEventHandler(async (event) => {
     // If paid with pass -> update payment to refunded and add credits back to pass
     // If paid with card -> update payment to refunded and trigger refund through payment provider (not implemented yet)
 
-    const paymentToRefund = await findPayment(updated.id, event.context.user.id);
+    const paymentToRefund = await findPayment(updated.id);
     if (!paymentToRefund) {
       return sendError(event, createError({
         statusCode: 404,
@@ -57,10 +57,17 @@ export default defineAuthenticatedEventHandler(async (event) => {
       }));
     }
 
+    if (paymentToRefund.userId !== updated.userId) {
+      return sendError(event, createError({
+        statusCode: 400,
+        statusMessage: "Payment does not belong to booking owner, refund process cannot be completed",
+      }));
+    }
+
     if (paymentToRefund.passId && paymentToRefund.lanesFromPass && paymentToRefund.paymentStatus === PAYMENT_STATUS_PAID) {
       // refund to pass by adding credits back
-      const passToUpdate = await findValidPass(paymentToRefund.passId, event.context.user.id);
-      if (!passToUpdate) {
+      const passToUpdate = await findPassById(paymentToRefund.passId);
+      if (!passToUpdate || passToUpdate.userId !== updated.userId || passToUpdate.isDeleted) {
         return sendError(event, createError({
           statusCode: 404,
           statusMessage: "Pass not found for payment, refund process cannot be completed",

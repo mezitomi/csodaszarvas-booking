@@ -8,11 +8,8 @@ export async function createPayment(data: Omit<PaymentType, "id">) {
   return created;
 }
 
-export async function findPayment(bookingId: number, userId: number) {
+export async function findPayment(bookingId: number) {
   return db.query.payment.findFirst({
-    where: (payment, { and, eq }) => and(
-      eq(payment.bookingId, bookingId),
-      eq(payment.userId, userId),
-    ),
+    where: (payment, { eq }) => eq(payment.bookingId, bookingId),
   });
 }

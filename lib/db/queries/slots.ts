@@ -9,9 +9,10 @@ import { laneAvailability } from "../schema";
 
 export async function getAvailableSlots(lanes: number, duration: number): Promise<string[]> {
   const availabilities: LaneAvailabilityType[] = await db.query.laneAvailability.findMany({
-    where: (availability, { and, gte }) => and(
+    where: (availability, { and, eq, gte }) => and(
       gte(availability.startTime, Date.now()), // Only consider future slots
       gte(availability.availableLanes, lanes), // Ensure enough lanes are available
+      eq(availability.isClosed, 0), // Closed slots are never bookable
     ),
     orderBy: (availability, { asc }) => [asc(availability.startTime)],
   });
@@ -60,7 +61,7 @@ export async function updateLaneAvailability(booking: BookingType, tx?: TxParam)
       ),
     });
 
-    slotsToUpdate.forEach(async (slot) => {
+    for (const slot of slotsToUpdate) {
       const newAvailableLanes = Math.max(Math.min(slot.availableLanes + laneChange, MAX_LANES), 0); // Ensure available lanes stay within 0 and MAX_LANES
       const [updated] = await tx1.update(laneAvailability)
         .set({ availableLanes: newAvailableLanes, updatedAt: Date.now() })
@@ -73,7 +74,7 @@ export async function updateLaneAvailability(booking: BookingType, tx?: TxParam)
         tx1.rollback(); // Rollback the transaction if any update fails or results in invalid lane counts
         return false;
       }
-    });
+    }
 
     return true; // All updates succeeded
   });

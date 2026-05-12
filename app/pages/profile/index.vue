@@ -52,7 +52,7 @@ watchEffect(() => {
         <VaCardContent v-if="passes && passes.length > 0">
           <ul>
             <li v-for="pass in passes" :key="pass.id">
-              {{ new Date(pass.createdAt).toLocaleDateString() }} - {{ new Date(pass.expiresAt).toLocaleDateString() }} - {{ pass.creditType }} - {{ pass.creditsRemaining }}
+              {{ new Date(pass.createdAt).toLocaleDateString() }} - {{ new Date(pass.expiresAt).toLocaleDateString() }} - {{ $t(`common.credit_types.${pass.creditType}`) }} - {{ pass.creditsRemaining }}
             </li>
           </ul>
         </VaCardContent>

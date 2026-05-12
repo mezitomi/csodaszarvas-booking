@@ -67,14 +67,14 @@
         "select_duration": "Mennyi időre szeretnél foglalni? Akár három órát is lőhetsz, ha bírod szusszal.",
         "select_date": "Mikor szeretnél lőni? Válaszd ki a foglalásod dátumát és időpontját. A kiválasztott dátum alapján megmutatjuk a rendelkezésre álló időpontokat.",
         "select_equipment": "Hozol-e saját felszerelést, vagy bérelsz tőlünk?",
-        "select_payment": "Hogyan szeretnél fizetni? Ha van érvényes bérleted, felhasználhatod azt, vagy fizethetsz bankkártyával is.",
+        "select_payment": "Hogyan szeretnél fizetni? Ha van érvényes bérleted, felhasználhatod, vagy választhatod a helyszíni fizetést.",
         "equipment_option_use_own": "Van saját felszerelésem",
         "equipment_option_rent": "Bérlek felszerelést",
         "confirmation": "Kérjük, ellenőrizd a foglalásod adatait, mielőtt véglegesítenéd a foglalást. Ha minden rendben van, kattints a Tovább gombra a fizetéshez.",
         "use_pass": "Bérlet használata",
         "incompatible_pass": "Ez a bérlet nem használható ehhez a foglaláshoz",
         "pay_with_pass": "Fizetés bérlettel",
-        "pay_with_card": "Fizetés kártyával"
+        "pay_on_site": "Helyszínen fizetek"
       },
       "booking_details": "Foglalás adatai",
       "duration": "Időtartam",
@@ -147,6 +147,7 @@
     "booking_status": {
       "waiting_for_payment": "Fizetésre vár",
       "cancelled": "Lemondva",
+      "on_site_payment": "Helyszínen fizet",
       "confirmed": "Fizetve",
       "reserved": "Fenntartva"
     }

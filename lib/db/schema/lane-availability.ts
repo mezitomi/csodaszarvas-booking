@@ -2,6 +2,8 @@ import { int, sqliteTable, unique } from "drizzle-orm/sqlite-core";
 import { createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
+import { slotAdjustmentRequest } from "./slot-adjustment-request";
+
 export const laneAvailability = sqliteTable(
   "lane_availability",
   {
@@ -10,6 +12,9 @@ export const laneAvailability = sqliteTable(
     startTime: int().notNull(),
     endTime: int().notNull(),
     availableLanes: int().notNull().default(5),
+    isClosed: int().notNull().default(0),
+    isOverridden: int().notNull().default(0),
+    adjustmentRequestId: int().references(() => slotAdjustmentRequest.id, { onDelete: "set null" }),
     createdAt: int().notNull(),
     updatedAt: int().notNull(),
   },

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { InsertPassType } from "~~/lib/db/schema/pass";
 
+import { to } from "await-to-js";
+
 const emit = defineEmits<Emits>();
 const { $csrfFetch } = useNuxtApp();
 
@@ -9,15 +11,26 @@ type Emits = {
 };
 
 const showModal = ref(false);
+const isSubmitting = ref(false);
 
-function createPass(pass: InsertPassType) {
-  $csrfFetch(ROUTE_ADMIN_PASSES, {
+async function createPass(pass: InsertPassType) {
+  if (isSubmitting.value)
+    return;
+
+  isSubmitting.value = true;
+  const [error] = await to($csrfFetch(ROUTE_ADMIN_PASSES, {
     method: "POST",
     body: JSON.stringify(pass),
-  }).then(() => {
-    showModal.value = false;
-    emit("update:passes");
-  });
+  }));
+  isSubmitting.value = false;
+
+  if (error) {
+    console.error("Failed to issue pass:", error);
+    return;
+  }
+
+  showModal.value = false;
+  emit("update:passes");
 }
 </script>
 
@@ -35,7 +48,7 @@ function createPass(pass: InsertPassType) {
     </template>
 
     <template #default>
-      <CsIssuePassForm @submit="createPass" />
+      <CsIssuePassForm :loading="isSubmitting" @submit="createPass" />
     </template>
   </VaModal>
 </template>

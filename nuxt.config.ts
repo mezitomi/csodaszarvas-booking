@@ -24,9 +24,14 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@pinia/nuxt",
     "@nuxtjs/i18n",
+    "nuxt-cron",
     "nuxt-csurf",
     "@sentry/nuxt/module",
   ],
+  cron: {
+    jobsDir: "cron",
+    runOnInit: false,
+  },
   components: [
     {
       path: "~/components",

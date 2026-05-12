@@ -1,8 +1,9 @@
 export const BOOKING_STATUS_CANCELLED = "cancelled";
 export const BOOKING_STATUS_ACTIVE = "confirmed";
+export const BOOKING_STATUS_ON_SITE_PAYMENT = "on_site_payment";
 export const BOOKING_STATUS_WAITING_FOR_PAYMENT = "waiting_for_payment";
 export const BOOKING_STATUS_RESERVED = "reserved";
-export const BookingStatusTypes = [BOOKING_STATUS_CANCELLED, BOOKING_STATUS_ACTIVE, BOOKING_STATUS_WAITING_FOR_PAYMENT, BOOKING_STATUS_RESERVED] as const;
+export const BookingStatusTypes = [BOOKING_STATUS_CANCELLED, BOOKING_STATUS_ACTIVE, BOOKING_STATUS_ON_SITE_PAYMENT, BOOKING_STATUS_WAITING_FOR_PAYMENT, BOOKING_STATUS_RESERVED] as const;
 
 export type BookingStatus = (typeof BookingStatusTypes)[number];
 
@@ -34,7 +35,8 @@ export const PASS_EXPIRATION_MS = 60 * 24 * 60 * 60 * 1000; // 60 days in millis
 export const PAYMENT_STATUS_PAID = "paid";
 export const PAYMENT_STATUS_REFUNDED = "refunded";
 export const PAYMENT_STATUS_PENDING = "pending";
-export const PaymentStatusTypes = [PAYMENT_STATUS_PAID, PAYMENT_STATUS_REFUNDED, PAYMENT_STATUS_PENDING] as const;
+export const PAYMENT_STATUS_ON_SITE = "on_site";
+export const PaymentStatusTypes = [PAYMENT_STATUS_PAID, PAYMENT_STATUS_REFUNDED, PAYMENT_STATUS_PENDING, PAYMENT_STATUS_ON_SITE] as const;
 export type PaymentStatus = (typeof PaymentStatusTypes)[number];
 
 export const USER_ROLE_USER = "user";

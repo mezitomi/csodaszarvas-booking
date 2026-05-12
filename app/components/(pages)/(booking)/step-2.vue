@@ -12,6 +12,8 @@ const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 const { locale } = useI18n();
+const { weekdayNames, firstWeekday, monthNames } = useDatePickerLocale();
+const datePickerKey = computed(() => `${locale.value}-${firstWeekday.value}`);
 
 const selectedDate = ref<Date | null>(null);
 
@@ -32,8 +34,12 @@ const selectedSlot = computed({
   <div class="container">
     <p>{{ $t("pages.booking.steps.select_date") }}</p>
     <VaDatePicker
+      :key="datePickerKey"
       v-model="selectedDate"
       :allowed-days="day => availableSlots.some((slot: string) => new Date(slot).toDateString() === day.toDateString())"
+      :first-weekday="firstWeekday"
+      :weekday-names="weekdayNames"
+      :month-names="monthNames"
       stateful
       @update:model-value="selectedSlot = null"
     />

@@ -4,11 +4,18 @@ import type { InsertPassType } from "~~/lib/db/schema/pass";
 
 import { useForm } from "vuestic-ui";
 
+const props = withDefaults(defineProps<Props>(), {
+  loading: false,
+});
 const emit = defineEmits<Emits>();
 const formRef = ref();
 const { isValid, validate } = useForm(formRef);
 const { t } = useI18n();
 const { weekdayNames, firstWeekday, monthNames } = useDatePickerLocale();
+
+type Props = {
+  loading?: boolean;
+};
 
 type FormContentType = {
   userId?: number;
@@ -65,6 +72,10 @@ function handleSelectUser(user: UserType) {
 }
 
 function submit() {
+  if (props.loading) {
+    return;
+  }
+
   if (!isValid.value) {
     return;
   }
@@ -121,7 +132,12 @@ function submit() {
       :weekday-names="weekdayNames"
       :month-names="monthNames"
     />
-    <VaButton preset="primary" @click="validate() && submit()">
+    <VaButton
+      preset="primary"
+      :loading="props.loading"
+      :disabled="props.loading"
+      @click="validate() && submit()"
+    >
       {{ $t("forms.save") }}
     </VaButton>
   </VaForm>

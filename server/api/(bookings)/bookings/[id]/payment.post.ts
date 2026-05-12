@@ -3,7 +3,7 @@ import { findValidPass, updatePass } from "~~/lib/db/queries/passes";
 import { createPayment } from "~~/lib/db/queries/payments";
 import { InsertPaymentSchema } from "~~/lib/db/schema";
 
-import { BOOKING_STATUS_ACTIVE, CREDIT_TYPE_REGULAR, CREDIT_TYPE_RENTAL } from "~/utils/constants";
+import { BOOKING_STATUS_ACTIVE, BOOKING_STATUS_ON_SITE_PAYMENT, CREDIT_TYPE_REGULAR, CREDIT_TYPE_RENTAL, PAYMENT_STATUS_ON_SITE } from "~/utils/constants";
 import defineAuthenticatedEventHandler from "~/utils/define-authenticated-event-handler";
 
 export default defineAuthenticatedEventHandler(async (event) => {
@@ -85,7 +85,7 @@ export default defineAuthenticatedEventHandler(async (event) => {
     paymentId: created.id,
     updatedAt: created.createdAt,
     updatedBy: event.context.user.id,
-    status: BOOKING_STATUS_ACTIVE,
+    status: created.paymentStatus === PAYMENT_STATUS_ON_SITE ? BOOKING_STATUS_ON_SITE_PAYMENT : BOOKING_STATUS_ACTIVE,
   };
 
   const updatedBooking = await updateBooking(updatedBookingData, event.context.user.id);

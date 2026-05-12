@@ -10,6 +10,8 @@ const EnvSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string(),
   SENTRY_AUTH_TOKEN: z.string(),
   SENTRY_DSN: z.string(),
+  SLOT_GENERATION_HORIZON_DAYS: z.string(),
+  SLOT_GENERATION_CRON: z.string(),
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;
