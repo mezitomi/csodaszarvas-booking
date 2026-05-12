@@ -84,7 +84,7 @@
       "lanes": "Lőállás(ok)",
       "hours": "óra",
       "expires_at": "Lejárat",
-      "credits_remaining": "Hátralévő bérlet kreditek"
+      "credits_remaining": "Hátralévő kredit"
     },
     "admin": {
       "title": "Admin felület",

@@ -22,6 +22,8 @@
       "needs_equipment": "I need equipment",
       "lanes": "lanes",
       "hours": "hours",
+      "lane": "Lane",
+      "lane_and_equipment": "Lane and equipment",
       "minutes": "minutes",
       "no_upcoming_bookings": "You have no upcoming bookings.",
       "confirm_cancel_booking": "Are you sure you want to cancel this booking?",
@@ -60,11 +62,11 @@
       "steps": {
         "next": "Next",
         "back": "Previous",
-        "step_1": "Select lanes and duration",
-        "step_2": "Select date and time",
-        "step_3": "Select equipment",
-        "step_4": "Confirmation",
-        "step_5": "Payment",
+        "step_1_label": "Lanes and duration",
+        "step_2_label": "Date and time",
+        "step_3_label": "Equipment",
+        "step_4_label": "Confirmation",
+        "step_5_label": "Payment",
         "select_lanes": "How many lanes do you want to book? One lane is suitable for a single person, but you can book multiple lanes if you want to shoot with friends.",
         "select_duration": "How long do you want to book? You can shoot up to 3 hours, if you have the breath for it.",
         "select_date": "When do you want to shoot? Select the date and time of your booking. We will show you the available time slots based on the date you select.",
@@ -222,7 +224,8 @@
         "start_time": "Start time",
         "service": "Service",
         "details": "Details",
-        "status": "Status"
+        "status": "Status",
+        "actions": "Actions"
       }
     }
   },

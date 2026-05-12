@@ -55,13 +55,13 @@ const showModal = ref(false);
     <template #default>
       <div class="cards">
         <VaCard v-for="pass in compatiblePasses" :key="pass.id">
-          <VaCardTitle> {{ pass.creditType }}</VaCardTitle>
+          <VaCardTitle>{{ $t(`common.credit_types.${pass.creditType}`) }}</VaCardTitle>
           <VaCardContent>
             <p>
               {{ $t('pages.booking.expires_at') }}: {{ new Date(pass.expiresAt).toLocaleDateString() }}
             </p>
             <p>
-              {{ pass.creditsRemaining }} {{ $t('pages.booking.credits_remaining') }}
+              {{ $t('pages.booking.credits_remaining') }}: {{ pass.creditsRemaining }}
             </p>
             <VaButton v-if="pass.creditType === model.creditType" @click="payWithPass(pass)">
               {{ $t('pages.booking.steps.use_pass') }}
@@ -84,6 +84,7 @@ const showModal = ref(false);
   gap: 20px;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .va-card {

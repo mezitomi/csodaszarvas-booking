@@ -10,6 +10,8 @@ const passesStore = usePassesStore();
 const { passes } = storeToRefs(passesStore);
 const { t } = useI18n();
 const title = t("brand_name");
+const localePath = useLocalePath();
+
 useHead({
   title,
   titleTemplate: null,
@@ -17,6 +19,11 @@ useHead({
 
 // During SSR, wait for user to be available
 const user = computed(() => authStore.user);
+
+async function handleLogout() {
+  await authStore.signOut();
+  await navigateTo(localePath("login"));
+}
 
 // Only fetch passes after user is loaded
 watchEffect(() => {
@@ -61,7 +68,7 @@ watchEffect(() => {
         </VaCardContent>
       </VaCard>
     </div>
-    <VaButton @click="authStore.signOut">
+    <VaButton @click="handleLogout">
       {{ $t("pages.profile.logout") }}
     </VaButton>
   </div>
@@ -81,10 +88,9 @@ watchEffect(() => {
 
 .cards {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 20px;
-  flex-direction: row;
   flex-wrap: wrap;
 }
 
