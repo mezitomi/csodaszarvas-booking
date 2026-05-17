@@ -12,7 +12,9 @@ export function useExternalLinks() {
     const target = new URL(home);
     const localeValue = options?.locale ?? locale.value;
 
-    target.searchParams.set("lang", localeValue);
+    // Main site locale routing uses path prefixes instead of query params.
+    target.pathname = localeValue === "en" ? "/en" : "/";
+    target.searchParams.delete("lang");
 
     return target.toString();
   }
