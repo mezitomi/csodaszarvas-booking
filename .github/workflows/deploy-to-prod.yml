@@ -20,9 +20,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t csodaszarvas:latest .
-          docker save csodaszarvas:latest -o csodaszarvas-latest.tar
-          chmod 644 csodaszarvas-latest.tar
+          docker build -t csodaszarvas-booking:latest .
+          docker save csodaszarvas-booking:latest -o csodaszarvas-booking-latest.tar
+          chmod 644 csodaszarvas-booking-latest.tar
 
       - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
@@ -30,8 +30,8 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
-          source: "csodaszarvas-latest.tar,docker-compose.production.yml,scripts/deploy.sh"
-          target: "/home/${{ secrets.VPS_USERNAME }}/apps/csodaszarvas/"
+          source: "csodaszarvas-booking-latest.tar,docker-compose.production.yml,scripts/deploy.sh"
+          target: "/home/${{ secrets.VPS_USERNAME }}/apps/csodaszarvas-booking/"
 
       - name: Fix deploy script path on VPS
         uses: appleboy/ssh-action@v1.0.3
@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
           script: |
-            cd ~/apps/csodaszarvas
+            cd ~/apps/csodaszarvas-booking
             mv scripts/deploy.sh deploy.sh 2>/dev/null || true
             rmdir scripts 2>/dev/null || true
             chmod +x deploy.sh
@@ -52,12 +52,12 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
           script: |
-            cd ~/apps/csodaszarvas
-            APP_DIR="$HOME/apps/csodaszarvas" ./deploy.sh
+            cd ~/apps/csodaszarvas-booking
+            APP_DIR="$HOME/apps/csodaszarvas-booking" ./deploy.sh
 
       - name: Clean up local artifacts
         if: always()
-        run: rm -f csodaszarvas-latest.tar
+        run: rm -f csodaszarvas-booking-latest.tar
 
       - name: Verify deployment
         uses: appleboy/ssh-action@v1.0.3
@@ -66,6 +66,6 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
           script: |
-            cd ~/apps/csodaszarvas
+            cd ~/apps/csodaszarvas-booking
             docker compose ps
-            echo "Deployment successful! App is running."
+            echo "Deployment successful! Booking App is running."
