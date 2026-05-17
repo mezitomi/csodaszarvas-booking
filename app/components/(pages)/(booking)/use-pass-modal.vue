@@ -47,6 +47,7 @@ const showModal = ref(false);
     mobile-fullscreen
     attach-element="body"
     :z-index="2000"
+    close-button
   >
     <template #anchor="{ show }">
       <VaButton
