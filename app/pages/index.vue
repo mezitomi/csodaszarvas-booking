@@ -15,13 +15,7 @@ const localePath = useLocalePath();
 
 <template>
   <div class="container">
-    <CsArrowSeparator lenght="medium" class="arrow-separator">
-      <template #default>
-        <h3>
-          {{ $t("brand_name") }}
-        </h3>
-      </template>
-    </CsArrowSeparator>
+    <CsBrandingHeader />
     <CsUpcomingBookings class="upcoming-bookings" />
     <div class="button-group">
       <VaButton :to="localePath('booking')">

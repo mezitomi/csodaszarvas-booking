@@ -41,7 +41,13 @@ const showModal = ref(false);
 </script>
 
 <template>
-  <VaModal v-model="showModal" hide-default-actions>
+  <VaModal
+    v-model="showModal"
+    hide-default-actions
+    mobile-fullscreen
+    attach-element="body"
+    :z-index="2000"
+  >
     <template #anchor="{ show }">
       <VaButton
         :disabled="compatiblePasses.length === 0"

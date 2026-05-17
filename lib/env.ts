@@ -12,6 +12,7 @@ const EnvSchema = z.object({
   SENTRY_DSN: z.string(),
   SLOT_GENERATION_HORIZON_DAYS: z.string(),
   SLOT_GENERATION_CRON: z.string(),
+  HOME_PAGE_URL: z.string(),
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;

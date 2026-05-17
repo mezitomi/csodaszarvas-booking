@@ -20,11 +20,7 @@ useHead({
 
 <template>
   <div class="container">
-    <CsArrowSeparator lenght="medium" class="arrow-separator">
-      <template #default>
-        <h1>{{ $t("brand_name") }}</h1>
-      </template>
-    </CsArrowSeparator>
+    <CsBrandingHeader />
     <p>{{ t("pages.login.title") }}</p>
     <CsGoogleAuthButton />
   </div>

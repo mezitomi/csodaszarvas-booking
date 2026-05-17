@@ -28,6 +28,10 @@ const selectedSlot = computed({
   get: () => props.selectedSlot,
   set: (value: string | null) => emit("update:selectedSlot", value),
 });
+
+whenever(() => selectedSlot.value && !selectedDate.value, () => {
+  emit("update:selectedSlot", null);
+});
 </script>
 
 <template>
@@ -79,9 +83,29 @@ const selectedSlot = computed({
 
   .chips {
     display: flex;
-    flex-direction: column;
     gap: 0.5rem;
     margin-left: 2rem;
+    flex-wrap: wrap;
+    min-inline-size: 40px;
+
+    @media (min-width: 575px) {
+      flex-direction: column;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .container {
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chips {
+      margin-left: 0;
+      margin-top: 1rem;
+      justify-content: center;
+    }
   }
 }
 </style>

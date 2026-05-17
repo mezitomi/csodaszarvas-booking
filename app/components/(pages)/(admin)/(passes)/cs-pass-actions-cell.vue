@@ -18,7 +18,12 @@ async function handleDelete() {
     return;
   }
 
-  await confirm(t("pages.admin.passes.delete_pass_confirm_message"))
+  await confirm({
+    message: t("pages.admin.passes.delete_pass_confirm_message"),
+    mobileFullscreen: true,
+    attachElement: "body",
+    zIndex: 2000,
+  })
     .then(async (confirmed) => {
       if (!confirmed)
         return;

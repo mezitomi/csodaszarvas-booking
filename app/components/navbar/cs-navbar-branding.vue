@@ -1,5 +1,11 @@
+<script setup lang="ts">
+import { useExternalLinks } from "~/composables/use-external-links";
+
+const { getHomeUrl } = useExternalLinks();
+</script>
+
 <template>
-  <NuxtLinkLocale class="branding" to="/">
+  <NuxtLink class="branding" :to="getHomeUrl()">
     <CsDeerLogo
       class="full-branding"
       :is-flipped="true"
@@ -9,7 +15,7 @@
       <p>{{ $t("navbar.branding.part_2") }}</p>
     </div>
     <CsDeerLogo />
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

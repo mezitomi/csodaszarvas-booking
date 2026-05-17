@@ -73,13 +73,7 @@ const defaultColDef = ref<ColDef>({
 
 <template>
   <div class="container">
-    <CsArrowSeparator lenght="medium" class="arrow-separator">
-      <template #default>
-        <h3>
-          {{ $t("pages.admin.users.title") }}
-        </h3>
-      </template>
-    </CsArrowSeparator>
+    <CsBrandingHeader />
     <div style="height: 500px; width: 100%;">
       <AgGridVue
         :key="locale"

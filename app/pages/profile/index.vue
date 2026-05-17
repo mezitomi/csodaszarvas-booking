@@ -35,13 +35,7 @@ watchEffect(() => {
 
 <template>
   <div class="container">
-    <CsArrowSeparator lenght="medium" class="arrow-separator">
-      <template #default>
-        <h3>
-          {{ $t("brand_name") }}
-        </h3>
-      </template>
-    </CsArrowSeparator>
+    <CsBrandingHeader />
     <h3 v-if="user">
       {{ $t("pages.profile.greeting") }} {{ user.name }}
     </h3>
@@ -59,7 +53,13 @@ watchEffect(() => {
         <VaCardContent v-if="passes && passes.length > 0">
           <ul>
             <li v-for="pass in passes" :key="pass.id">
-              {{ new Date(pass.createdAt).toLocaleDateString() }} - {{ new Date(pass.expiresAt).toLocaleDateString() }} - {{ $t(`common.credit_types.${pass.creditType}`) }} - {{ pass.creditsRemaining }}
+              <p>
+                {{ $t(`common.credit_types.${pass.creditType}`) }}
+              </p>
+              <p>
+                {{ $t("pages.booking.credits_remaining") }}: {{ pass.creditsRemaining }}
+              </p>
+              <p>{{ $t("pages.booking.expires_at") }}: {{ new Date(pass.expiresAt).toLocaleDateString() }}</p>
             </li>
           </ul>
         </VaCardContent>
@@ -83,24 +83,35 @@ watchEffect(() => {
   max-inline-size: 1000px;
   inline-size: 80%;
   margin: auto;
-  gap: 2rem;
+  gap: 1rem;
+  padding-block-end: 1rem;
 }
 
 .cards {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 20px;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
 .va-card {
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  @media (min-width: 575px) {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 
-  &:hover {
-    transform: translateY(-5px);
+    &:hover {
+      transform: translateY(-5px);
+    }
   }
+
   inline-size: 300px;
+  p {
+    margin-bottom: 0.25rem;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
 }
 </style>

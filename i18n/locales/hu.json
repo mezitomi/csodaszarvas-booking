@@ -67,7 +67,7 @@
         "select_duration": "Mennyi időre szeretnél foglalni? Akár három órát is lőhetsz, ha bírod szusszal.",
         "select_date": "Mikor szeretnél lőni? Válaszd ki a foglalásod dátumát és időpontját. A kiválasztott dátum alapján megmutatjuk a rendelkezésre álló időpontokat.",
         "select_equipment": "Hozol-e saját felszerelést, vagy bérelsz tőlünk?",
-        "select_payment": "Hogyan szeretnél fizetni? Ha van érvényes bérleted, felhasználhatod, vagy választhatod a helyszíni fizetést.",
+        "select_payment": "Hogyan szeretnél fizetni? Ha van érvényes bérleted, felhasználhatod, vagy választhatod a helyszíni fizetést amíg a teszt-időszak tart.",
         "equipment_option_use_own": "Van saját felszerelésem",
         "equipment_option_rent": "Bérlek felszerelést",
         "confirmation": "Kérjük, ellenőrizd a foglalásod adatait, mielőtt véglegesítenéd a foglalást. Ha minden rendben van, kattints a Tovább gombra a fizetéshez.",

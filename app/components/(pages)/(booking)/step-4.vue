@@ -22,8 +22,9 @@ const { locale } = useI18n();
 <template>
   <div class="container">
     <p>{{ $t("pages.booking.steps.confirmation") }}</p>
+
+    <strong>{{ $t("pages.booking.booking_details") }}:</strong>
     <div>
-      <p>{{ $t("pages.booking.booking_details") }}:</p>
       <p v-if="model.selectedSlot">
         {{ $t("pages.booking.selected_slot") }}: {{ new Date(model.selectedSlot).toLocaleString(locale) }}
       </p>
@@ -44,7 +45,7 @@ const { locale } = useI18n();
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   max-inline-size: 800px;
   margin: auto;
 }

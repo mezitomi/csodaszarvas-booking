@@ -71,7 +71,7 @@
         "select_duration": "How long do you want to book? You can shoot up to 3 hours, if you have the breath for it.",
         "select_date": "When do you want to shoot? Select the date and time of your booking. We will show you the available time slots based on the date you select.",
         "select_equipment": "Will you bring your own equipment or do you need to rent from us?",
-        "select_payment": "How do you want to pay? If you have a valid pass, you can use it, or choose to pay on-site.",
+        "select_payment": "How do you want to pay? If you have a valid pass, you can use it, or choose to pay on-site until the test run is over.",
         "equipment_option_use_own": "I have my own equipment",
         "equipment_option_rent": "I need to rent equipment",
         "confirmation": "Please review your booking details before confirming. If everything looks good, click next to continue with payment.",

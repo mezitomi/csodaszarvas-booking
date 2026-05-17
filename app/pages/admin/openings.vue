@@ -69,14 +69,7 @@ async function handleGenerateSlots() {
 
 <template>
   <div class="container">
-    <CsArrowSeparator lenght="medium" class="arrow-separator">
-      <template #default>
-        <h3>
-          {{ $t("pages.admin.openings.title") }}
-        </h3>
-      </template>
-    </CsArrowSeparator>
-
+    <CsBrandingHeader />
     <div class="table-wrapper">
       <table class="openings-grid">
         <thead>

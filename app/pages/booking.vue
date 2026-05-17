@@ -6,8 +6,6 @@ import { useAvailableSlotsStore } from "~~/stores/available-slots";
 import { usePassesStore } from "~~/stores/passes";
 import { to } from "await-to-js";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
-import { defineVaStepperSteps, useForm as vuesticUseForm } from "vuestic-ui";
 
 import type { modelType } from "~/components/(pages)/(booking)/step-4.vue";
 
@@ -45,9 +43,6 @@ const compatiblePasses: Ref<PassType[]> = computed(() => {
 });
 
 const { $csrfFetch } = useNuxtApp();
-
-const stepForm = ref();
-vuesticUseForm(stepForm);
 
 whenever(() => model.currentStep, async (newStep) => {
   if (newStep === 1) {
@@ -102,13 +97,14 @@ async function finalizeBookingDetails() {
   return true;
 }
 
-const steps = ref(defineVaStepperSteps([
+const steps = [
   {
     label: t("pages.booking.steps.step_1_label"),
   },
   {
     label: t("pages.booking.steps.step_2_label"),
-    beforeLeave: async (step) => {
+    canProceed: () => Boolean(model.selectedSlot),
+    beforeLeave: async (step: any) => {
       await preserveTimeSlot()
         .then((success) => {
           step.hasError = !success;
@@ -117,7 +113,7 @@ const steps = ref(defineVaStepperSteps([
   },
   {
     label: t("pages.booking.steps.step_3_label"),
-    beforeLeave: async (step) => {
+    beforeLeave: async (step: any) => {
       await preserveTimeSlot()
         .then((success) => {
           step.hasError = !success;
@@ -126,7 +122,7 @@ const steps = ref(defineVaStepperSteps([
   },
   {
     label: t("pages.booking.steps.step_4_label"),
-    beforeLeave: async (step) => {
+    beforeLeave: async (step: any) => {
       await finalizeBookingDetails()
         .then((success) => {
           if (!success) {
@@ -138,72 +134,43 @@ const steps = ref(defineVaStepperSteps([
   {
     label: t("pages.booking.steps.step_5_label"),
   },
-]));
+];
 </script>
 
 <template>
   <div class="container">
-    <CsArrowSeparator lenght="medium" class="arrow-separator">
-      <template #default>
-        <h1>{{ $t("brand_name") }}</h1>
+    <CsStepper
+      v-model="model.currentStep"
+      :steps="steps"
+      linear
+      finish-button-hidden
+      next-disabled-on-error
+    >
+      <template #step-content-0>
+        <Step1
+          v-model:lanes="model.lanes"
+          v-model:duration="model.duration"
+        />
       </template>
-    </CsArrowSeparator>
-    <VaForm ref="stepForm">
-      <VaStepper
-        v-model="model.currentStep"
-        :steps="steps"
-        linear
-        vertical
-        finish-button-hidden
-        next-disabled-on-error
-        navigation-disabled
-      >
-        <template #controls="{ nextStep, prevStep }">
-          <div class="btn-container">
-            <VaButton
-              v-if="model.currentStep !== 4"
-              class="btn"
-              :disabled="model.currentStep === 0 || model.currentStep === 4"
-              @click="prevStep()"
-            >
-              {{ $t("pages.booking.steps.back") }}
-            </VaButton>
-            <VaButton
-              v-if="model.currentStep !== 4"
-              class="btn"
-              @click="nextStep()"
-            >
-              {{ $t("pages.booking.steps.next") }}
-            </VaButton>
-          </div>
-        </template>
-
-        <template #step-content-0>
-          <Step1
-            v-model:lanes="model.lanes"
-            v-model:duration="model.duration"
-          />
-        </template>
-        <template #step-content-1>
-          <Step2
-            v-model:selected-slot="model.selectedSlot"
-            :available-slots="availableSlots"
-          />
-        </template>
-        <template #step-content-2>
-          <Step3 :credit-type="model.creditType" @update:credit-type="model.creditType = $event" />
-        </template>
-        <template #step-content-3>
-          <Step4 :model="model" />
-        </template>
-        <template #step-content-4>
-          <Step5
-            :compatible-passes="compatiblePasses"
-            :model="model"
-          />
-        </template>
-      </VaStepper>
-    </VaForm>
+      <template #step-content-1>
+        <Step2
+          v-model:selected-slot="model.selectedSlot"
+          :available-slots="availableSlots"
+        />
+      </template>
+      <template #step-content-2>
+        <Step3 :credit-type="model.creditType" @update:credit-type="model.creditType = $event" />
+      </template>
+      <template #step-content-3>
+        <Step4 :model="model" />
+      </template>
+      <template #step-content-4>
+        <Step5
+          :compatible-passes="compatiblePasses"
+          :model="model"
+        />
+      </template>
+    </CsStepper>
   </div>
 </template>
 
@@ -211,30 +178,10 @@ const steps = ref(defineVaStepperSteps([
 .container {
   max-inline-size: 1000px;
   margin-inline: auto;
-
-  :deep(.va-stepper__step-button__icon) {
-    display: none;
-  }
-}
-
-:deep(.va-stepper__navigation--vertical) {
-  @media (max-width: 575px) {
-    margin-inline: 1rem;
-    padding-inline-start: 0;
-  }
+  padding-inline: 10px;
 }
 
 :deep(.va-radio__square) {
   margin-inline-end: 1rem;
-}
-
-.btn-container {
-  display: flex;
-  gap: 1.5rem;
-  inline-size: 100%;
-}
-
-.btn {
-  inline-size: 100%;
 }
 </style>

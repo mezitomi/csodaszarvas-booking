@@ -45,7 +45,12 @@ async function cancelBooking(bookingId: number) {
     ? t("pages.index.confirm_cancel_booking_grace_period_passed_warning")
     : t("pages.index.confirm_cancel_booking");
 
-  await confirm(confirmText)
+  await confirm({
+    message: confirmText,
+    mobileFullscreen: true,
+    attachElement: "body",
+    zIndex: 2000,
+  })
     .then(async (confirmed) => {
       if (!confirmed)
         return;
@@ -59,14 +64,21 @@ const colDefs = computed<ColDef[]>(() => [
   {
     field: "startTime",
     headerName: t("grids.bookings.columns.start_time"),
-    valueFormatter: params => new Date(params.data?.startTime).toLocaleString(locale.value, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
-    flex: isMobile.value ? 2 : undefined,
+    valueFormatter: params => new Date(params.data?.startTime).toLocaleString(locale.value, isMobile.value
+      ? {
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }
+      : {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+    flex: isMobile.value ? 3 : undefined,
   },
   {
     field: "Szolgáltatás",
@@ -84,6 +96,7 @@ const colDefs = computed<ColDef[]>(() => [
     field: "status",
     headerName: t("grids.bookings.columns.status"),
     valueFormatter: params => t(`common.booking_status.${params.data?.status}`),
+    flex: isMobile.value ? 3 : undefined,
   },
   {
     field: "actions",
@@ -92,6 +105,7 @@ const colDefs = computed<ColDef[]>(() => [
     sortable: false,
     filter: false,
     resizable: false,
+    flex: isMobile.value ? 2 : undefined,
   },
 ]);
 
@@ -120,9 +134,10 @@ const gridOptions = computed(() => ({
       <AgGridVue
         :key="locale"
         data-grid-name="grids.bookings"
-        style="height: 100%; width: 100%;"
+        style="width: 100%;"
         class="ag-theme-vuestic"
         theme="legacy"
+        dom-layout="autoHeight"
         :column-defs="colDefs"
         :row-data="bookings"
         :default-col-def="defaultColDef"
@@ -139,7 +154,6 @@ const gridOptions = computed(() => ({
 
 <style scoped lang="scss">
 .grid-container {
-  block-size: 400px;
   inline-size: 100%;
   margin-block-start: 1rem;
 }
@@ -147,6 +161,13 @@ const gridOptions = computed(() => ({
   max-inline-size: 1000px;
   margin: 2rem auto;
   inline-size: 100%;
+
+  h3 {
+    @media (max-width: 575px) {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+  }
 }
 .va-list {
   inline-size: 100%;

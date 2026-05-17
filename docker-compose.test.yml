@@ -13,6 +13,8 @@ services:
       - .env
     environment:
       - NODE_ENV=development
+      - NUXT_PUBLIC_HOME_PAGE_URL=${HOME_PAGE_URL}
+      - NUXT_PUBLIC_SENTRY_DSN=${SENTRY_DSN}
     networks:
       - csodaszarvas-test-network
 

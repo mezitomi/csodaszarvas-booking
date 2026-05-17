@@ -39,14 +39,16 @@ const arrowSrc = computed(() => {
 <style scoped lang="scss">
 .separator-container {
   text-align: center;
-
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  padding-block: 0.5rem;
 
   img {
     max-width: 100%;
     height: auto;
     vertical-align: middle;
+  }
+
+  @media (min-width: 575px) {
+    padding-block: 1rem;
   }
 }
 </style>
