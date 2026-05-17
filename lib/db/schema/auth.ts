@@ -39,10 +39,10 @@ export type UpdateUserType = z.infer<typeof UpdateUserSchema>;
 
 export const session = sqliteTable("session", {
   id: int().primaryKey({ autoIncrement: true }),
-  expiresAt: integer().notNull(),
+  expiresAt: integer({ mode: "timestamp_ms" }).notNull(),
   token: text().notNull().unique(),
-  createdAt: integer().notNull(),
-  updatedAt: integer().notNull(),
+  createdAt: integer({ mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer({ mode: "timestamp_ms" }).notNull(),
   ipAddress: text(),
   userAgent: text(),
   userId: text().notNull().references(() => user.id, { onDelete: "cascade" }),
@@ -57,19 +57,19 @@ export const account = sqliteTable("account", {
   accessToken: text(),
   refreshToken: text(),
   idToken: text(),
-  accessTokenExpiresAt: integer(),
-  refreshTokenExpiresAt: integer(),
+  accessTokenExpiresAt: integer({ mode: "timestamp_ms" }),
+  refreshTokenExpiresAt: integer({ mode: "timestamp_ms" }),
   scope: text(),
   password: text(),
-  createdAt: integer().notNull(),
-  updatedAt: integer().notNull(),
+  createdAt: integer({ mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer({ mode: "timestamp_ms" }).notNull(),
 });
 
 export const verification = sqliteTable("verification", {
   id: int().primaryKey({ autoIncrement: true }),
   identifier: text().notNull(),
   value: text().notNull(),
-  expiresAt: integer().notNull(),
-  createdAt: integer(),
-  updatedAt: integer(),
+  expiresAt: integer({ mode: "timestamp_ms" }).notNull(),
+  createdAt: integer({ mode: "timestamp_ms" }),
+  updatedAt: integer({ mode: "timestamp_ms" }),
 });
