@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { mapAuthErrorMessage } from "~~/app/utils/auth-error";
 import { useAuthStore } from "~~/stores/auth";
 import { usePassesStore } from "~~/stores/passes";
+import { to } from "await-to-js";
 
 definePageMeta({
   middleware: ["logged-in"],
@@ -11,6 +13,7 @@ const { passes } = storeToRefs(passesStore);
 const { t } = useI18n();
 const title = t("brand_name");
 const localePath = useLocalePath();
+const route = useRoute();
 
 useHead({
   title,
@@ -19,10 +22,49 @@ useHead({
 
 // During SSR, wait for user to be available
 const user = computed(() => authStore.user);
+const linkingGoogle = ref(false);
+const linkError = ref("");
+
+watchEffect(() => {
+  const queryError = typeof route.query.error === "string" ? route.query.error : "";
+
+  if (!queryError)
+    return;
+
+  linkError.value = mapAuthErrorMessage({ code: queryError }, t);
+});
 
 async function handleLogout() {
   await authStore.signOut();
   await navigateTo(localePath("login"));
+}
+
+async function handleLinkGoogle() {
+  if (linkingGoogle.value)
+    return;
+
+  linkingGoogle.value = true;
+  linkError.value = "";
+
+  const profilePath = localePath("profile");
+  const profileErrorPath = localePath({
+    name: "profile",
+    query: {
+      source: "link-google",
+    },
+  });
+
+  const [error] = await to(authStore.linkGoogle(profilePath, profileErrorPath));
+  linkingGoogle.value = false;
+
+  if (error) {
+    // TODO hát ez a typing se túl szép, refaktorálni kéne
+    const mappedError = (typeof error === "object" && error && "error" in error)
+      ? (error as { error?: { code?: string; message?: string; status?: number } }).error
+      : (error as { code?: string; message?: string; status?: number });
+
+    linkError.value = mapAuthErrorMessage(mappedError, t);
+  }
 }
 
 // Only fetch passes after user is loaded
@@ -70,6 +112,16 @@ watchEffect(() => {
     </div>
     <VaButton @click="handleLogout">
       {{ $t("pages.profile.logout") }}
+    </VaButton>
+    <VaAlert
+      v-if="linkError"
+      color="danger"
+      closeable
+    >
+      {{ linkError }}
+    </VaAlert>
+    <VaButton :loading="linkingGoogle" @click="handleLinkGoogle">
+      {{ $t("pages.profile.link_google") }}
     </VaButton>
   </div>
 </template>

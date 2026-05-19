@@ -2,13 +2,14 @@
 import { useAuthStore } from "~~/stores/auth";
 
 const authStore = useAuthStore();
+const { t } = useI18n();
 </script>
 
 <template>
   <VaButton
     @click="authStore.googleSignIn"
   >
-    Login with Google
+    {{ t("pages.login.google_sign_in") }}
     <VaProgressCircle
       v-if="authStore.loading"
       color="secondary"

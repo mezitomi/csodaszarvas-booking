@@ -44,6 +44,7 @@
     "profile": {
       "greeting": "Hello, ",
       "logout": "Kijelentkezés",
+      "link_google": "Google fiók összekapcsolása",
       "name": "Név",
       "email": "Email",
       "registered_at": "Regisztráció dátuma",
@@ -52,7 +53,78 @@
       "account_info": "Fiók adatai"
     },
     "login": {
-      "title": "A folytatáshoz kérjük, jelentkezz be."
+      "title": "A folytatáshoz kérjük, jelentkezz be.",
+      "email": "Email cím",
+      "password": "Jelszó",
+      "remember_me": "Maradjak bejelentkezve",
+      "submit": "Bejelentkezés",
+      "google_sign_in": "Bejelentkezés Google fiókkal",
+      "create_account": "Nincs még fiókod? Regisztrálj",
+      "forgot_password": "Elfelejtetted a jelszavad?"
+    },
+    "signup": {
+      "title": "Hozz létre új fiókot",
+      "name": "Teljes név",
+      "email": "Email cím",
+      "password": "Jelszó",
+      "submit": "Regisztráció",
+      "success": "Ha az email címed még nincs használatban, elküldtük a megerősítő lépéseket.",
+      "back_to_login": "Vissza a bejelentkezéshez",
+      "password_requirements": "A jelszónak legalább 8 karakter de maximum 128 karakter hosszúnak kell lennie",
+      "invalid_email": "Érvénytelen email cím",
+      "name_required": "A név megadása kötelező",
+      "email_required": "Az email cím megadása kötelező"
+    },
+    "forgot_password": {
+      "title": "Jelszó visszaállítás",
+      "email": "Email cím",
+      "submit": "Reset link küldése",
+      "success": "Ha van ilyen email című fiók, elküldtük a jelszó-visszaállító linket.",
+      "back_to_login": "Vissza a bejelentkezéshez"
+    },
+    "reset_password": {
+      "title": "Új jelszó beállítása",
+      "new_password": "Új jelszó",
+      "submit": "Új jelszó mentése",
+      "success": "A jelszó sikeresen frissítve.",
+      "invalid_token": "Érvénytelen vagy lejárt visszaállítási token.",
+      "back_to_login": "Vissza a bejelentkezéshez"
+    },
+    "verify_email": {
+      "title": "Email cím megerősítése",
+      "email": "Email cím",
+      "resend": "Megerősítő email újraküldése",
+      "sent": "Ha az email címhez tartozik fiók, újra elküldtük a megerősítő levelet.",
+      "verified": "Az email címed megerősítése sikeres. Most már bejelentkezhetsz.",
+      "back_to_login": "Vissza a bejelentkezéshez"
+    },
+    "auth_status": {
+      "cta_to_login": "Tovább a bejelentkezéshez",
+      "cta_request_new_link": "Új visszaállító link kérése",
+      "cta_resend_verification": "Megerősítő email újraküldése",
+      "forgot_requested": {
+        "title": "Kérés rögzítve",
+        "message": "Ha az email címhez tartozik fiók, elküldtük a jelszó-visszaállító linket."
+      },
+      "verify_email_success": {
+        "title": "Email cím megerősítve",
+        "message": "Az email címed megerősítése sikeres. Most már bejelentkezhetsz."
+      },
+      "verify_email_failed": {
+        "title": "A megerősítő link érvénytelen"
+      },
+      "signup_created": {
+        "title": "Regisztráció rögzítve",
+        "message": "Ha az email címed még nincs használatban, elküldtük a megerősítő lépéseket."
+      },
+      "reset_success": {
+        "title": "Jelszó frissítve",
+        "message": "A jelszavad sikeresen frissült. Most már be tudsz jelentkezni az új jelszóval."
+      },
+      "reset_token_expired": {
+        "title": "Lejárt vagy érvénytelen link",
+        "message": "A jelszó-visszaállító linked már nem használható. Kérj egy újat, és folytasd onnan."
+      }
     },
     "booking": {
       "steps": {
@@ -137,6 +209,22 @@
           "update_failed": "Sikertelen frissítés. Kérlek próbáld meg újra."
         }
       }
+    }
+  },
+  "errors": {
+    "auth": {
+      "generic": "Sikertelen hitelesítés. Kérjük, próbáld újra.",
+      "invalid_email_or_password": "Hibás email cím vagy jelszó.",
+      "invalid_email": "Érvénytelen email cím.",
+      "invalid_token": "Érvénytelen vagy lejárt token.",
+      "rate_limited": "Túl sok próbálkozás. Kérjük, várj egy kicsit és próbáld újra.",
+      "email_verification_required": "Kérjük, erősítsd meg az email címed a belépéshez.",
+      "user_already_exists": "Ez az email cím már használatban van.",
+      "signup_disabled": "A regisztráció jelenleg nem elérhető.",
+      "account_not_linked": "Ez a külső fiók nincs összekapcsolva a profiloddal.",
+      "account_already_linked": "Ez a külső fiók már egy másik felhasználóhoz tartozik.",
+      "email_does_not_match": "A külső fiók email címe nem egyezik a profiloddal.",
+      "unable_to_link_account": "A külső fiók összekapcsolása nem sikerült."
     }
   },
   "common": {

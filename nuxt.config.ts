@@ -32,7 +32,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "nuxt-cron",
     "nuxt-csurf",
-    "@sentry/nuxt/module",
+    ...(env.E2E_MODE ? [] : ["@sentry/nuxt/module"]),
   ],
   cron: {
     jobsDir: "cron",
@@ -183,6 +183,26 @@ export default defineNuxtConfig({
       "login": {
         en: "/login",
         hu: "/bejelentkezes",
+      },
+      "signup": {
+        en: "/signup",
+        hu: "/regisztracio",
+      },
+      "forgot-password": {
+        en: "/forgot-password",
+        hu: "/jelszo-visszaallitas",
+      },
+      "reset-password": {
+        en: "/reset-password",
+        hu: "/uj-jelszo",
+      },
+      "verify-email": {
+        en: "/verify-email",
+        hu: "/email-megerosites",
+      },
+      "auth-status": {
+        en: "/auth-status",
+        hu: "/ertesites",
       },
       "booking": {
         en: "/booking",

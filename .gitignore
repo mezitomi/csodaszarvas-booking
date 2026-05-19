@@ -24,3 +24,8 @@ logs
 !.env.example
 
 local.db*
+
+# Playwright outputs
+playwright-report
+test-results
+.playwright

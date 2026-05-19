@@ -46,11 +46,83 @@
       "backToHome": "Back to home"
     },
     "login": {
-      "title": "To continue, please log in."
+      "title": "To continue, please log in.",
+      "email": "Email",
+      "password": "Password",
+      "remember_me": "Keep me signed in",
+      "submit": "Sign in",
+      "google_sign_in": "Sign in with Google",
+      "create_account": "Need an account? Sign up",
+      "forgot_password": "Forgot your password?"
+    },
+    "signup": {
+      "title": "Create your account",
+      "name": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign up",
+      "success": "If your email is eligible, we've sent the verification steps.",
+      "back_to_login": "Back to sign in",
+      "password_requirements": "Password must be at least 8 but no more than 128 characters long",
+      "invalid_email": "Invalid email address",
+      "name_required": "Name is required",
+      "email_required": "Email is required"
+    },
+    "forgot_password": {
+      "title": "Reset your password",
+      "email": "Email",
+      "submit": "Send reset link",
+      "success": "If an account exists for this email, we've sent a reset link.",
+      "back_to_login": "Back to sign in"
+    },
+    "reset_password": {
+      "title": "Set a new password",
+      "new_password": "New password",
+      "submit": "Save new password",
+      "success": "Your password has been updated.",
+      "invalid_token": "Invalid or expired reset token.",
+      "back_to_login": "Back to sign in"
+    },
+    "verify_email": {
+      "title": "Verify your email",
+      "email": "Email",
+      "resend": "Resend verification email",
+      "sent": "If an account exists for this email, we have resent the verification email.",
+      "verified": "Your email has been verified successfully. You can now sign in.",
+      "back_to_login": "Back to sign in"
+    },
+    "auth_status": {
+      "cta_to_login": "Continue to sign in",
+      "cta_request_new_link": "Request a new reset link",
+      "cta_resend_verification": "Resend verification email",
+      "forgot_requested": {
+        "title": "Request received",
+        "message": "If an account exists for this email, we've sent a password reset link."
+      },
+      "verify_email_success": {
+        "title": "Email verified",
+        "message": "Your email has been verified successfully. You can now sign in."
+      },
+      "verify_email_failed": {
+        "title": "Verification link is not valid"
+      },
+      "signup_created": {
+        "title": "Sign-up received",
+        "message": "If your email is eligible, we've sent the verification steps."
+      },
+      "reset_success": {
+        "title": "Password updated",
+        "message": "Your password has been updated successfully. You can now sign in with your new password."
+      },
+      "reset_token_expired": {
+        "title": "Expired or invalid link",
+        "message": "This password reset link is no longer valid. Please request a new one to continue."
+      }
     },
     "profile": {
       "greeting": "Hello, ",
       "logout": "Logout",
+      "link_google": "Link Google account",
       "name": "Name",
       "email": "Email",
       "registered_at": "Registered at",
@@ -142,6 +214,22 @@
           "update_failed": "Failed to update. Please try again."
         }
       }
+    }
+  },
+  "errors": {
+    "auth": {
+      "generic": "Authentication failed. Please try again.",
+      "invalid_email_or_password": "Invalid email or password.",
+      "invalid_email": "Invalid email address.",
+      "invalid_token": "Invalid or expired token.",
+      "rate_limited": "Too many attempts. Please wait a bit and try again.",
+      "email_verification_required": "Please verify your email before signing in.",
+      "user_already_exists": "This email address is already in use.",
+      "signup_disabled": "Sign-up is currently disabled.",
+      "account_not_linked": "This social account is not linked to your profile.",
+      "account_already_linked": "This social account is already linked to another user.",
+      "email_does_not_match": "The social account email does not match your profile email.",
+      "unable_to_link_account": "Failed to link social account."
     }
   },
   "common": {
