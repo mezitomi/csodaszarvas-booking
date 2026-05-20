@@ -9,6 +9,8 @@ export const authClient = createAuthClient({
 });
 
 export const useAuthStore = defineStore("useAuthStore", () => {
+  const { locale } = useI18n();
+
   const session = authClient.useSession();
   const user = computed(() => session.value.data?.user);
   const loading = computed(() => session.value.isPending || session.value.isRefetching);
@@ -17,6 +19,8 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     const { csrf } = useCsrf();
     const token = typeof csrf === "string" ? csrf : csrf?.value;
     const headers = new Headers();
+
+    headers.append("accept-language", locale.value === "hu" ? "hu-HU" : "en-US");
 
     if (token)
       headers.append("csrf-token", token);

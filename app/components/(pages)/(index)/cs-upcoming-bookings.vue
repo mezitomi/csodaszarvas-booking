@@ -127,10 +127,10 @@ const gridOptions = computed(() => ({
 
 <template>
   <div class="container">
-    <h3>
+    <h3 v-if="bookings && bookings.length > 0">
       {{ $t("pages.index.upcoming_bookings") }}
     </h3>
-    <div class="grid-container">
+    <div v-if="bookings && bookings.length > 0" class="grid-container">
       <AgGridVue
         :key="locale"
         data-grid-name="grids.bookings"
@@ -149,6 +149,9 @@ const gridOptions = computed(() => ({
         :context="gridOptions.context"
       />
     </div>
+    <p v-if="!bookings || bookings.length === 0">
+      {{ $t("pages.index.no_upcoming_bookings") }}
+    </p>
   </div>
 </template>
 

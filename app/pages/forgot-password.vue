@@ -86,9 +86,15 @@ useHead({
 }
 
 .auth-form {
-  inline-size: min(26rem, 90vw);
+  inline-size: min(26rem, 90%);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+:deep(.va-input-wrapper__size-keeper) {
+  inline-size: unset;
+  min-inline-size: unset;
+  max-inline-size: unset;
 }
 </style>

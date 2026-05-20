@@ -32,7 +32,7 @@ const EnvSchema = z.object({
   SMTP_SECURE: EnvBoolean,
   SMTP_USER: z.string(),
   SMTP_PASS: z.string(),
-  SMTP_FROM: z.string().email(),
+  SMTP_FROM: z.email(),
   SENTRY_AUTH_TOKEN: z.string(),
   SENTRY_DSN: z.string(),
   SLOT_GENERATION_HORIZON_DAYS: z.string(),

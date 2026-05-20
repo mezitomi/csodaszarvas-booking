@@ -32,7 +32,13 @@ ENV NODE_ENV=production \
     SENTRY_DSN=placeholder \
     SLOT_GENERATION_CRON=placeholder \
     SLOT_GENERATION_HORIZON_DAYS=placeholder \
-    HOME_PAGE_URL=placeholder
+    HOME_PAGE_URL=placeholder \
+    SMTP_HOST=placeholder \
+    SMTP_PORT=1 \
+    SMTP_SECURE=0 \
+    SMTP_USER=placeholder \
+    SMTP_PASS=placeholder \
+    SMTP_FROM=place@hold.er
 
 # Build the Nuxt application
 RUN pnpm run build
