@@ -110,7 +110,10 @@ watchEffect(() => {
         </VaCardContent>
       </VaCard>
     </div>
-    <VaButton @click="handleLogout">
+    <VaButton :to="localePath('/')">
+      {{ $t("pages.404.backToHome") }}
+    </VaButton>
+    <VaButton preset="secondary" @click="handleLogout">
       {{ $t("pages.profile.logout") }}
     </VaButton>
     <VaAlert
@@ -120,7 +123,11 @@ watchEffect(() => {
     >
       {{ linkError }}
     </VaAlert>
-    <VaButton :loading="linkingGoogle" @click="handleLinkGoogle">
+    <VaButton
+      preset="secondary"
+      :loading="linkingGoogle"
+      @click="handleLinkGoogle"
+    >
       {{ $t("pages.profile.link_google") }}
     </VaButton>
   </div>
