@@ -8,14 +8,25 @@ type SendEmailInput = {
   text: string;
 };
 
+const hasSmtpUser = env.SMTP_USER.trim().length > 0;
+const hasSmtpPass = env.SMTP_PASS.trim().length > 0;
+
+if (hasSmtpUser !== hasSmtpPass) {
+  throw new Error("SMTP_USER and SMTP_PASS must either both be set or both be empty");
+}
+
 const transporter = nodemailer.createTransport({
   host: env.SMTP_HOST,
   port: env.SMTP_PORT,
   secure: env.SMTP_SECURE,
-  auth: {
-    user: env.SMTP_USER,
-    pass: env.SMTP_PASS,
-  },
+  ...(hasSmtpUser && hasSmtpPass
+    ? {
+        auth: {
+          user: env.SMTP_USER,
+          pass: env.SMTP_PASS,
+        },
+      }
+    : {}),
 });
 
 export async function sendEmail({ to, subject, text }: SendEmailInput) {
